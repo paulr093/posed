@@ -1,48 +1,44 @@
 import { useGLTF } from "@react-three/drei"
-import { folder, useControls } from "leva"
-import React, { useRef } from "react"
+import React, { useEffect, useRef } from "react"
+import useGui from "../utils/useGui"
+import GUI from 'lil-gui'
 
 function CubeMan(props) {
    const group = useRef()
    const { nodes, materials } = useGLTF("/CubeMan.glb")
    const bodyRotation = nodes.Body.rotation
-   const headRotation = nodes.Head.rotation
+   const headRotation = nodes.Head_1.rotation
 
-   // Body GUI
-   const { BodyX, BodyY, BodyZ, HeadX, HeadY, HeadZ } = useControls(
-      "Rotation",
-      {
-         Body: folder({
-            // BodyVectors: {
-            //    x: bodyRotation.x,
-            //    y: bodyRotation.y,
-            //    z: bodyRotation.z,
-            // },
-            BodyX: { value: bodyRotation.x, min: 1.5, max: 5 },
-            BodyY: { value: bodyRotation.y, min: -3, max: 3 },
-            BodyZ: { value: bodyRotation.z, min: 1.5, max: 5 },
-         }),
-         Head: folder({
-            // HeadVectors: {
-            //     x: headRotation.x,
-            //     y: headRotation.y,
-            //     z: headRotation.z,
-            //  },
-            HeadX: { value: headRotation.x, min: -0.5, max: 0.5 },
-            HeadY: { value: headRotation.y, min: -3, max: 3 },
-            HeadZ: { value: headRotation.z, min: -0.5, max: 0.5 },
-         }),
-      },
-      { collapsed: false }
-   )
+   const gui = new GUI()
+   const headFolder = gui.addFolder("Head Rotation")
+   const bodyFolder = gui.addFolder("Body Rotation")
+   const axis = ["x", "y", "z"]
 
-   bodyRotation.x = BodyX
-   bodyRotation.y = BodyY
-   bodyRotation.z = BodyZ
+   const reset = {
+      bodyReset: () => bodyFolder.reset(),
+      headReset: () => headFolder.reset(),
+   }
 
-   headRotation.x = HeadX
-   headRotation.y = HeadY
-   headRotation.z = HeadZ
+   //    main title
+   gui.title("Modify Character")
+
+   //    default close all tabs
+   gui.close(true)
+   headFolder.close(true)
+   bodyFolder.close(true)
+
+   //    reset each folder
+   bodyFolder.add(reset, "bodyReset")
+   headFolder.add(reset, "headReset")
+
+   //    vector 3 mapping
+   axis.map((ele) => {
+      headFolder.add(headRotation, ele, -1.5, 1.5)
+      bodyFolder.add(bodyRotation, ele, -5, 5)
+   })
+
+   //    edit skin color
+   gui.addColor(materials.YellowSkin, "color")
 
    return (
       <group ref={group} {...props} dispose={null}>
@@ -51,28 +47,28 @@ function CubeMan(props) {
             <primitive object={nodes.hipL} />
             <primitive object={nodes.hipR} />
             <skinnedMesh
-               geometry={nodes.Cube.geometry}
-               material={materials["Material.001"]}
-               skeleton={nodes.Cube.skeleton}
+               geometry={nodes.CubeMan.geometry}
+               material={nodes.CubeMan.material}
+               skeleton={nodes.CubeMan.skeleton}
             />
             <skinnedMesh
-               geometry={nodes.Cube_1.geometry}
-               material={materials["Material.003"]}
-               skeleton={nodes.Cube_1.skeleton}
+               geometry={nodes.Plane.geometry}
+               material={materials.GlassesPlastic}
+               skeleton={nodes.Plane.skeleton}
             />
-            <HatBase nodes={nodes} />
+            <skinnedMesh
+               geometry={nodes.Plane_1.geometry}
+               material={materials.GlassesLense}
+               skeleton={nodes.Plane_1.skeleton}
+            />
+            <skinnedMesh geometry={nodes.Head.geometry} material={nodes.Head.material} skeleton={nodes.Head.skeleton} />
+            <skinnedMesh
+               geometry={nodes.Mustache.geometry}
+               material={materials.Mustache}
+               skeleton={nodes.Mustache.skeleton}
+            />
          </group>
       </group>
-   )
-}
-
-function HatBase({nodes}) {
-   return (
-      <skinnedMesh
-         geometry={nodes.CubeMan_hat.geometry}
-         material={nodes.CubeMan_hat.material}
-         skeleton={nodes.CubeMan_hat.skeleton}
-      />
    )
 }
 

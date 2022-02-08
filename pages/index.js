@@ -5,7 +5,6 @@ import { useState, useEffect } from "react"
 import Sidebar from "../components/Sidebar"
 
 export default function Home() {
-
    return (
       <div>
          <Head>
@@ -14,10 +13,11 @@ export default function Home() {
             <link rel='icon' href='/favicon.ico' />
          </Head>
 
-         <div className='min-h-screen flex bg-slate-100'>
-            <Sidebar />
+         <div className='min-h-screen max-h-screen flex bg-slate-100'>
+            <div className='overflow-y-auto w-full'>
+               <Sidebar />
+            </div>
             <div className='bg-white'>
-               {/* <ModelRenderer /> */}
                <FiberRender />
             </div>
          </div>
