@@ -21,7 +21,7 @@ function FiberRender(props) {
    }, [])
 
    function Loading() {
-      return <Html>{progress}% Loading...</Html>
+      return <Html>{Math.floor(progress)}% Loading...</Html>
    }
 
    return (
