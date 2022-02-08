@@ -19,7 +19,7 @@ function ContactShadows() {
                   ContactShadows
                   <ChevronRightIcon className={`w-5 h-5 duration-100 ${open ? "transform rotate-90" : ""}`} />
                </Disclosure.Button>
-               <Disclosure.Panel className='space-y-3'>
+               <Disclosure.Panel className='space-y-3 w-full'>
                   <div className='flex flex-row justify-between items-center'>
                      <h1 className='text-opacity-75 text-black text-sm'>Show Shadows</h1>
                      <Switch
