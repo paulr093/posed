@@ -1,16 +1,11 @@
 import { atom } from "recoil"
-import CubeMan from "../assets/CubeMan"
 import Jim from "../assets/Jim"
 import LowPolyRocket from "../assets/LowPolyRocket"
+import Phone from "../assets/Phone"
 
 export const characterState = atom({
    key: "characterState",
    default: { label: "Low Poly Rocket", model: <LowPolyRocket />, path: "/LowPolyRocket.glb" },
-})
-
-export const characterSettings = atom({
-   key: "characterSettings",
-   default: null,
 })
 
 export const renderSettings = atom({
@@ -22,6 +17,10 @@ export const renderSettings = atom({
          shadowOpacity: 0.5,
          shadowRes: 256,
          focalLength: 10,
+      },
+      scene: {
+         intensity: 0.5,
+         environment: "city",
       },
    },
 })
