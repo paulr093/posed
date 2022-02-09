@@ -1,56 +1,35 @@
 import { useGLTF } from "@react-three/drei"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Range } from "react-range"
 import { useRecoilState } from "recoil"
 import LowPolyRocket from "../../assets/LowPolyRocket"
 import LowPolyRocketNoSmoke from "../../assets/LowPolyRocketNoSmoke"
 import { characterState } from "../../recoil/states"
-import RangeSlider from "../shared/RangeSlider"
 import Select from "react-select"
-import Jim from "../../assets/Jim"
-import { Disclosure, Popover, Transition } from "@headlessui/react"
+import { Disclosure, Popover } from "@headlessui/react"
 import { ChevronRightIcon } from "@heroicons/react/outline"
-import { ChromePicker } from "react-color"
-import { Color } from "three"
+import Phone from "../../assets/Phone"
+import DecimalToRGB from "../../utils/decimalToRGB"
+import RGBtoDecimal from "../../utils/rgbToDecimal"
+import { HexColorInput, RgbColorPicker } from "react-colorful"
+import rgbToHex from "../../utils/rgbToHex"
+import hexToRgb from "../../utils/hexToRGB"
 
 const SELECTOPTIONS = [
    { value: <LowPolyRocket />, label: "Low Poly Rocket", path: "/LowPolyRocket.glb" },
    { value: <LowPolyRocketNoSmoke />, label: "Low Poly Rocket No Smoke", path: "/LowPolyRocket_NoSmoke.glb" },
-   // { value: <Jim />, label: "Jim", path: "/Jim.glb" },
+   { value: <Phone />, label: "Phone", path: "/Phone.glb" },
 ]
 
 function CharacterSettings() {
-   const [rangeVal, setRangeVal] = useState(0)
    const [activeModel, setActiveModel] = useRecoilState(characterState)
-   const { nodes, materials } = useGLTF(activeModel.path)
+   const { materials } = useGLTF(activeModel.path)
    const [colorPicker, setColorPicker] = useState(materials)
 
-   function DecimalToRGB(r, g, b) {
-      r = r * 256
-      g = g * 256
-      b = b * 256
-      var rgb = "rgb(" + r + "," + g + "," + b + ")"
-      // rgb = rgb.split("(")[1].split(")")[0]
-      // rgb = rgb.split(",")
-
-      // var b = rgb.map(function (x) {
-      //    //For each array element
-      //    x = parseInt(x).toString(16) //Convert to a base16 string
-      //    return x.length == 1 ? "0" + x : x //Add zero if we get only one character
-      // })
-      // b = "#" + b.join("")
-
-      return rgb
-   }
-
-   function RGBtoDecimal(r, g, b) {
-      r = r / 256
-      g = g / 256
-      b = b / 256
-      var rgbDecimal = { r: r, g: g, b: b }
-
-      return rgbDecimal
-   }
+   useEffect(() => {
+      setColorPicker(materials)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [activeModel.path])
 
    return (
       <div className='flex flex-col flex-grow space-y-3 w-full py-2'>
@@ -58,7 +37,7 @@ function CharacterSettings() {
          <Select
             options={SELECTOPTIONS}
             placeholder={activeModel.label ?? "Select"}
-            value={{value: activeModel.model, label: activeModel.label}}
+            value={{ value: activeModel.model, label: activeModel.label }}
             onChange={(option) => setActiveModel({ model: option.value, path: option.path, label: option.label })}
          />
          <Disclosure>
@@ -76,31 +55,63 @@ function CharacterSettings() {
                      <h2 className='text-gray-500 text-sm text-center'>Click on the color below to change it</h2>
                      {Object.entries(materials).map((material, id) => (
                         <div key={id} className='flex justify-between items-center'>
-                           <h3 key={id}>{material[0]}</h3>
+                           {material[0] && <h3 key={id} className='text-opacity-75 text-black text-sm'>{material[0]}</h3>}
                            <Popover className='relative'>
-                              <Popover.Button
-                                 className={`h-6 w-8 rounded-lg shadow-md hover:ring-2 hover:ring-blue-500 duration-150`}
-                                 style={{
-                                    backgroundColor: DecimalToRGB(
-                                       material[1].color.r,
-                                       material[1].color.g,
-                                       material[1].color.b
-                                    ),
-                                 }}
-                              ></Popover.Button>
+                              {material[0] && (
+                                 <Popover.Button
+                                    className={`h-6 w-8 rounded-lg shadow-md hover:ring-2 hover:ring-blue-500 duration-150`}
+                                    style={{
+                                       backgroundColor: DecimalToRGB(
+                                          materials[material[0]].color.r,
+                                          materials[material[0]].color.g,
+                                          materials[material[0]].color.b,
+                                          true
+                                       ),
+                                    }}
+                                 ></Popover.Button>
+                              )}
 
-                              <Popover.Panel className='absolute z-10 right-3'>
-                                 <ChromePicker
-                                    color={DecimalToRGB(
-                                       colorPicker[material[0]].color.r,
-                                       colorPicker[material[0]].color.g,
-                                       colorPicker[material[0]].color.b
+                              <Popover.Panel className='absolute z-10 right-0'>
+                                 <RgbColorPicker
+                                    color={DecimalToRGB(material[1].color.r, material[1].color.g, material[1].color.b)}
+                                    onChange={(event) => {
+                                       const materialName = material[0]
+                                       materials[material[0]].color = RGBtoDecimal(event.r, event.g, event.b)
+                                       setColorPicker({
+                                          ...colorPicker,
+                                          materialName: {
+                                             ...materialName,
+                                             color: RGBtoDecimal(event.r, event.g, event.b),
+                                          },
+                                       })
+                                    }}
+                                 />
+                                 <HexColorInput
+                                    color={rgbToHex(
+                                       DecimalToRGB(material[1].color.r, material[1].color.g, material[1].color.b).r,
+                                       DecimalToRGB(material[1].color.r, material[1].color.g, material[1].color.b).g,
+                                       DecimalToRGB(material[1].color.r, material[1].color.g, material[1].color.b).b
                                     )}
                                     onChange={(event) => {
-                                       const toDecimal = RGBtoDecimal(event.rgb.r, event.rgb.g, event.rgb.b)
                                        const materialName = material[0]
-                                       materials[material[0]].color = toDecimal
-                                       setColorPicker({ ...colorPicker, materialName: toDecimal })
+                                       setTimeout(() => {
+                                          materials[material[0]].color = RGBtoDecimal(
+                                             hexToRgb(event).r,
+                                             hexToRgb(event).g,
+                                             hexToRgb(event).b
+                                          )
+                                          setColorPicker({
+                                             ...colorPicker,
+                                             materialName: {
+                                                ...materialName,
+                                                color: RGBtoDecimal(
+                                                   hexToRgb(event).r,
+                                                   hexToRgb(event).g,
+                                                   hexToRgb(event).b
+                                                ),
+                                             },
+                                          })
+                                       }, 250)
                                     }}
                                  />
                               </Popover.Panel>
