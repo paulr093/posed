@@ -40,12 +40,12 @@ function CharacterSettings() {
             value={{ value: activeModel.model, label: activeModel.label }}
             onChange={(option) => setActiveModel({ model: option.value, path: option.path, label: option.label })}
          />
-         <Disclosure>
+         <Disclosure defaultOpen={true}>
             {({ open }) => (
                <>
                   <Disclosure.Button
                      className={`py-2 hover:bg-blue-500 rounded-lg hover:text-white duration-150 font-bold text-left flex flex-row items-center justify-between p-1 ${
-                        open ? "bg-blue-500 text-white" : ""
+                        open ? "bg-blue-500 text-white hover:bg-blue-400 hover:text-slate-50" : ""
                      }`}
                   >
                      Colors
@@ -55,7 +55,11 @@ function CharacterSettings() {
                      <h2 className='text-gray-500 text-sm text-center'>Click on the color below to change it</h2>
                      {Object.entries(materials).map((material, id) => (
                         <div key={id} className='flex justify-between items-center'>
-                           {material[0] && <h3 key={id} className='text-opacity-75 text-black text-sm'>{material[0]}</h3>}
+                           {material[0] && (
+                              <h3 key={id} className='text-opacity-75 text-black text-sm'>
+                                 {material[0]}
+                              </h3>
+                           )}
                            <Popover className='relative'>
                               {material[0] && (
                                  <Popover.Button

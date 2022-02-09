@@ -23,12 +23,12 @@ function Scene() {
    ]
 
    return (
-      <Disclosure>
+      <Disclosure defaultOpen={true}>
          {({ open }) => (
             <>
                <Disclosure.Button
                   className={`py-2 hover:bg-blue-500 rounded-lg hover:text-white duration-150 font-bold text-left flex w-full flex-row items-center justify-between p-1 ${
-                     open ? "bg-blue-500 text-white" : ""
+                     open ? "bg-blue-500 text-white hover:bg-blue-400 hover:text-slate-50" : ""
                   }`}
                >
                   Scene
