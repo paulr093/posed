@@ -1,8 +1,14 @@
 import React, { useRef, useState, useEffect, Suspense } from "react"
-import { Canvas, useFrame, useThree, useLoader } from "@react-three/fiber"
-// import { OrbitControls } from "../addons/OrbitControls"
-import { GLTFLoader } from "../addons/GLTFLoader"
-import { useGLTF, Sky, Stage, Center, OrbitControls, ContactShadows, Stats, useProgress, Html } from "@react-three/drei"
+import { Canvas } from "@react-three/fiber"
+import {
+   Stage,
+   OrbitControls,
+   ContactShadows,
+   Stats,
+   useProgress,
+   Html,
+   CycleRaycast,
+} from "@react-three/drei"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { characterState, renderSettings } from "../recoil/states"
 
@@ -26,7 +32,7 @@ function FiberRender(props) {
 
    return (
       <div className='h-[100vh] w-[75vw]'>
-         <Canvas gl={{ preserveDrawingBuffer: true, antialias: true }} dpr={Math.max(dpr, 2)}>
+         <Canvas gl={{ preserveDrawingBuffer: true, antialias: true }} camera={{fov: 75}} dpr={Math.max(dpr, 2)}>
             <OrbitControls makeDefault minDistance={1.25} />
 
             {settings.contactShadow.show && (
@@ -36,17 +42,22 @@ function FiberRender(props) {
                   blur={settings.contactShadow.shadowBlur}
                   far={settings.contactShadow.focalLength}
                   resolution={256}
-                  position={[0, -0.38, 0]}
+                  position={[0, 0, 0.02]}
                />
             )}
 
             {showStats && <Stats showPanel={0} className='stats' {...props} />}
 
             <Suspense fallback={<Loading />}>
-               <Stage shadows={false} contactShadow={false} intensity={0.5} controls={ref}>
+               <Stage shadows={false} contactShadow={false} environment={settings.scene.environment} intensity={settings.scene.intensity} controls={ref}>
                   {character.model}
                </Stage>
             </Suspense>
+            <CycleRaycast
+               preventDefault={false}
+               scroll={true}
+               // onChange={(event) => console.log(event)}
+            />
          </Canvas>
       </div>
    )
