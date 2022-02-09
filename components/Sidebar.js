@@ -1,14 +1,11 @@
 import React, { useState } from "react"
-import { useRecoilState, useRecoilValue } from "recoil"
 import IconButton from "./shared/IconButton"
-import { characterState, renderSettings, showShadows } from "../recoil/states"
 import RenderSettings from "./SidebarTabs/RenderSettings"
 import CharacterSettings from "./SidebarTabs/CharacterSettings"
 import { PhotographIcon, CameraIcon, CogIcon } from "@heroicons/react/outline"
 import {saveAs} from "file-saver"
 
 function Sidebar() {
-   const [model, setModel] = useRecoilState(characterState)
    const [tab, setTab] = useState({
       render: true,
       character: false,

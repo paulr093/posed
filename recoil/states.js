@@ -1,7 +1,5 @@
 import { atom } from "recoil"
-import Jim from "../assets/Jim"
 import LowPolyRocket from "../assets/LowPolyRocket"
-import Phone from "../assets/Phone"
 
 export const characterState = atom({
    key: "characterState",
