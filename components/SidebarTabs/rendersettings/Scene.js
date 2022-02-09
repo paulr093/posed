@@ -27,7 +27,7 @@ function Scene() {
          {({ open }) => (
             <>
                <Disclosure.Button
-                  className={`py-2 hover:bg-blue-500 rounded-lg hover:text-white duration-150 font-bold text-left flex w-full flex-row items-center justify-between p-1 ${
+                  className={`py-2 px-3 hover:bg-blue-500 rounded-lg hover:text-white duration-150 font-bold text-left flex w-full flex-row items-center justify-between p-1 ${
                      open ? "bg-blue-500 text-white hover:bg-blue-400 hover:text-slate-50" : ""
                   }`}
                >
@@ -35,7 +35,7 @@ function Scene() {
                   <ChevronRightIcon className={`w-5 h-5 duration-150 ${open ? "transform rotate-90" : ""}`} />
                </Disclosure.Button>
 
-               <Disclosure.Panel className='flex flex-col space-y-2 w-full p-2'>
+               <Disclosure.Panel className='flex flex-col space-y-3 w-full'>
                   <div className='flex flex-row w-full justify-between items-center'>
                      <h2 className='text-opacity-75 text-black text-sm'>Lighting Intensity</h2>
                      <input

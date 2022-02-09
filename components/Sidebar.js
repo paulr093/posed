@@ -23,9 +23,9 @@ function Sidebar() {
    }
 
    return (
-      <div className='flex flex-grow flex-col h-full space-y-2 items-center p-3'>
-         <h1>Posed</h1>
-         <div className='flex flex-row justify-between w-full'>
+      <div className='flex flex-grow flex-col h-full space-y-4 items-center p-3 font-montserrat font-medium'>
+         <h1 className='font-bold text-3xl font-gugi'>Posed</h1>
+         <div className='flex flex-row justify-evenly w-full'>
             <IconButton
                active={tab.render}
                text={<CameraIcon className='h-8 w-8' />}
@@ -36,11 +36,11 @@ function Sidebar() {
                text={<PhotographIcon className='h-8 w-8' />}
                onClick={() => setTab({ render: false, character: true, settings: false })}
             />
-            <IconButton
+            {/* <IconButton
                active={tab.settings}
                text={<CogIcon className='h-8 w-8'/>}
                onClick={() => setTab({ render: false, character: false, settings: true })}
-            />
+            /> */}
          </div>
 
          {tab.render && <RenderSettings />}

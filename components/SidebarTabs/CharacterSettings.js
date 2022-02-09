@@ -44,7 +44,7 @@ function CharacterSettings() {
             {({ open }) => (
                <>
                   <Disclosure.Button
-                     className={`py-2 hover:bg-blue-500 rounded-lg hover:text-white duration-150 font-bold text-left flex flex-row items-center justify-between p-1 ${
+                     className={`py-2 px-3 hover:bg-blue-500 rounded-lg hover:text-white duration-150 font-bold text-left flex flex-row items-center justify-between p-1 ${
                         open ? "bg-blue-500 text-white hover:bg-blue-400 hover:text-slate-50" : ""
                      }`}
                   >
@@ -63,7 +63,7 @@ function CharacterSettings() {
                            <Popover className='relative'>
                               {material[0] && (
                                  <Popover.Button
-                                    className={`h-6 w-8 rounded-lg shadow-md hover:ring-2 hover:ring-blue-500 duration-150`}
+                                    className={`h-6 w-16 rounded-lg shadow-md hover:ring-2 hover:ring-blue-500 duration-150`}
                                     style={{
                                        backgroundColor: DecimalToRGB(
                                           materials[material[0]].color.r,
