@@ -43,10 +43,13 @@ function ContactShadows() {
                      <h1 className='text-opacity-75 text-black text-sm'>Blur</h1>
                      <input
                         value={settings.contactShadow.shadowBlur}
+                        step={0.5}
+                        min={0}
+                        max={10}
                         onChange={(e) =>
                            setSettings({
                               ...settings,
-                              contactShadow: { ...settings.contactShadow, shadowBlur: parseInt(e.target.value) },
+                              contactShadow: { ...settings.contactShadow, shadowBlur: e.target.value },
                            })
                         }
                         type='number'
@@ -60,7 +63,7 @@ function ContactShadows() {
                         onChange={(e) =>
                            setSettings({
                               ...settings,
-                              contactShadow: { ...settings.contactShadow, shadowOpacity: parseInt(e.target.value) },
+                              contactShadow: { ...settings.contactShadow, shadowOpacity: e.target.value },
                            })
                         }
                         type='number'
@@ -94,7 +97,7 @@ function ContactShadows() {
                         onChange={(e) =>
                            setSettings({
                               ...settings,
-                              contactShadow: { ...settings.contactShadow, focalLength: parseInt(e.target.value) },
+                              contactShadow: { ...settings.contactShadow, focalLength: e.target.value },
                            })
                         }
                         type='number'
