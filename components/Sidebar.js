@@ -4,6 +4,8 @@ import RenderSettings from "./SidebarTabs/RenderSettings"
 import CharacterSettings from "./SidebarTabs/CharacterSettings"
 import { PhotographIcon, CameraIcon, CogIcon } from "@heroicons/react/outline"
 import {saveAs} from "file-saver"
+import { characterState } from "../recoil/states"
+import { useRecoilValue } from "recoil"
 
 function Sidebar() {
    const [tab, setTab] = useState({
@@ -11,11 +13,13 @@ function Sidebar() {
       character: false,
       settings: false,
    })
+   const {label: label} = useRecoilValue(characterState)
 
    function Screenshot() {
-      let canvas = document.getElementsByTagName("canvas")[0].toDataURL("image/png")
-   
-      saveAs(canvas, "screenshot.png")
+      const canvas = document.getElementsByTagName("canvas")[0].toDataURL("image/png")
+      const downloadTitle = label.replace(/\s/g, '') + ".png"
+
+      saveAs(canvas, downloadTitle)
    }
 
    return (
