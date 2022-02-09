@@ -2,7 +2,6 @@ import React, { useRef, useEffect } from "react"
 import { useGLTF, useProgress } from "@react-three/drei"
 import GUI from "lil-gui"
 import useGui from "../utils/useGui"
-import { characterSettings } from "../recoil/states"
 import { useRecoilState } from "recoil"
 
 export default function Jim(props) {
@@ -19,7 +18,7 @@ export default function Jim(props) {
    //    useGui(headRotation, bodyRotation, leftArmRotation.upper, leftArmRotation.lower, materials.YellowSkin)
 
    return (
-      <group ref={group} {...props} dispose={null}>
+      <group ref={group} {...props}>
          <group position={[0, 0, 0]} scale={[0.35, 0.35, 0.35]}>
             <primitive object={nodes.body} />
             <primitive object={nodes.upperLegL} />
