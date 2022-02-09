@@ -5,7 +5,7 @@ export default function LowPolyRocket(props) {
   const group = useRef()
   const { nodes, materials } = useGLTF('/LowPolyRocket.glb')
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group ref={group} {...props}>
       <mesh
         castShadow
         receiveShadow
