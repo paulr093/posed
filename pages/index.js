@@ -1,8 +1,6 @@
 import Head from "next/head"
-import Image from "next/image"
 import FiberRender from "../components/FiberRender"
 import Sidebar from "../components/Sidebar"
-import { analytics } from "../firebase/initApp"
 
 export default function Home() {
 
