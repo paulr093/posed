@@ -21,7 +21,7 @@ function ContactShadows() {
                </Disclosure.Button>
                <Disclosure.Panel className='space-y-3 w-full'>
                   <div className='flex flex-row justify-between items-center'>
-                     <h1 className='text-opacity-75 text-black text-sm'>Show Shadows</h1>
+                     <h1 className='text-opacity-75 text-sm'>Show Shadows</h1>
                      <Switch
                         checked={settings.contactShadow.show}
                         onChange={(e) =>
@@ -39,8 +39,8 @@ function ContactShadows() {
                         />
                      </Switch>
                   </div>
-                  <div className='flex flex-row justify-between items-center'>
-                     <h1 className='text-opacity-75 text-black text-sm'>Blur</h1>
+                  <div className='flex flex-row justify-between items-center text-neutral-900 dark:text-white'>
+                     <h1 className='text-opacity-75 text-sm'>Blur</h1>
                      <input
                         value={settings.contactShadow.shadowBlur}
                         step={0.5}
@@ -53,11 +53,11 @@ function ContactShadows() {
                            })
                         }
                         type='number'
-                        className='w-1/4 p-1 bg-white bg-opacity-75 rounded-md appearance-none outline-none focus:ring-2 focus:ring-blue-500 duration-150'
+                        className='w-1/4 p-1 bg-white dark:bg-neutral-700 bg-opacity-75 rounded-md appearance-none outline-none focus:ring-2 focus:ring-blue-500 duration-150'
                      />
                   </div>
                   <div className='flex flex-row justify-between items-center'>
-                     <h1 className='text-opacity-75 text-black text-sm'>Opacity</h1>
+                     <h1 className='text-opacity-75 text-sm'>Opacity</h1>
                      <input
                         value={settings.contactShadow.shadowOpacity}
                         onChange={(e) =>
@@ -70,11 +70,11 @@ function ContactShadows() {
                         step={0.1}
                         min={0}
                         max={1}
-                        className='w-1/4 p-1 bg-white bg-opacity-75 rounded-md appearance-none outline-none focus:ring-2 focus:ring-blue-500 duration-150'
+                        className='w-1/4 p-1 bg-white dark:bg-neutral-700 bg-opacity-75 rounded-md appearance-none outline-none focus:ring-2 focus:ring-blue-500 duration-150'
                      />
                   </div>
                   <div className='flex flex-row justify-between items-center'>
-                     <h1 className='text-opacity-75 text-black text-sm'>Resolution</h1>
+                     <h1 className='text-opacity-75 text-sm'>Resolution</h1>
                      <input
                         value={settings.contactShadow.shadowRes}
                         onChange={(e) =>
@@ -87,11 +87,11 @@ function ContactShadows() {
                         step={settings.contactShadow.shadowRes * 2}
                         min={0}
                         max={4096}
-                        className='w-1/4 p-1 bg-white bg-opacity-75 rounded-md appearance-none outline-none focus:ring-2 focus:ring-blue-500 duration-150'
+                        className='w-1/4 p-1 bg-white dark:bg-neutral-700 bg-opacity-75 rounded-md appearance-none outline-none focus:ring-2 focus:ring-blue-500 duration-150'
                      />
                   </div>
                   <div className='flex flex-row justify-between items-center'>
-                     <h1 className='text-opacity-75 text-black text-sm'>Focal Length</h1>
+                     <h1 className='text-opacity-75 text-sm'>Focal Length</h1>
                      <input
                         value={settings.contactShadow.focalLength}
                         onChange={(e) =>
@@ -101,7 +101,7 @@ function ContactShadows() {
                            })
                         }
                         type='number'
-                        className='w-1/4 p-1 bg-white bg-opacity-75 rounded-md appearance-none outline-none focus:ring-2 focus:ring-blue-500 duration-150'
+                        className='w-1/4 p-1 bg-white dark:bg-neutral-700 bg-opacity-75 rounded-md appearance-none outline-none focus:ring-2 focus:ring-blue-500 duration-150'
                      />
                   </div>
                </Disclosure.Panel>
