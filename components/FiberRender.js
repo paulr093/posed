@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, Suspense } from "react"
 import { Canvas } from "@react-three/fiber"
-import { Stage, OrbitControls, ContactShadows, Stats, useProgress, Html, CycleRaycast } from "@react-three/drei"
+import { Stage, OrbitControls, ContactShadows, Stats, useProgress, Html, CycleRaycast, Environment } from "@react-three/drei"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { characterState, renderSettings } from "../recoil/states"
 
@@ -44,12 +44,12 @@ function FiberRender(props) {
                <Stage
                   shadows={false}
                   contactShadow={false}
-                  environment={settings.scene.environment}
                   intensity={settings.scene.intensity}
                   controls={ref}
                >
                   {character.model}
                </Stage>
+               <Environment files={settings.scene.environment} />
             </Suspense>
             <CycleRaycast
                preventDefault={false}
