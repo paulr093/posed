@@ -3,7 +3,7 @@ import LowPolyRocket from "../assets/LowPolyRocket"
 
 export const characterState = atom({
    key: "characterState",
-   default: { label: "Low Poly Rocket", model: <LowPolyRocket />, path: "/LowPolyRocket.glb" },
+   default: { label: "Low Poly Rocket", model: <LowPolyRocket />, path: "/glbs/LowPolyRocket.glb" },
 })
 
 export const renderSettings = atom({
@@ -18,7 +18,7 @@ export const renderSettings = atom({
       },
       scene: {
          intensity: 0.5,
-         environment: "/studio.hdr",
+         environment: "studio.hdr",
       },
    },
 })
