@@ -7,9 +7,10 @@ import Select from "react-select"
 
 function Scene() {
    const [{ scene }, setScene] = useRecoilState(renderSettings)
-   const upperCaseFirst = scene.environment.charAt(1).toUpperCase() + scene.environment.slice(2)
+   const upperCaseFirst = scene.environment.charAt(0).toUpperCase() + scene.environment.slice(1)
    const SELECTOPTIONS = [
-      { value: "/studio.hdr", label: "Studio" },
+      { value: "studio.hdr", label: "Studio" },
+      { value: "sunset.hdr", label: "Sunset" },
    ]
 
    return (
