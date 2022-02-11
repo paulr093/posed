@@ -7,19 +7,9 @@ import Select from "react-select"
 
 function Scene() {
    const [{ scene }, setScene] = useRecoilState(renderSettings)
-   const upperCaseFirst = scene.environment.charAt(0).toUpperCase() + scene.environment.slice(1)
+   const upperCaseFirst = scene.environment.charAt(1).toUpperCase() + scene.environment.slice(2)
    const SELECTOPTIONS = [
-      { value: "apartment", label: "Apartment" },
-      { value: "city", label: "City" },
-      { value: "dawn", label: "Dawn" },
-      { value: "forest", label: "Forest" },
-      { value: "lobby", label: "Lobby" },
-      { value: "night", label: "Night" },
-      { value: "park", label: "Park" },
-      { value: "studio", label: "Studio" },
-      { value: "sunset", label: "Sunset" },
-      { value: "night", label: "Night" },
-      { value: "warehouse", label: "Warehouse" },
+      { value: "/studio.hdr", label: "Studio" },
    ]
 
    return (
@@ -37,7 +27,7 @@ function Scene() {
 
                <Disclosure.Panel className='flex flex-col space-y-3 w-full'>
                   <div className='flex flex-row w-full justify-between items-center'>
-                     <h2 className='text-opacity-75 text-black text-sm'>Lighting Intensity</h2>
+                     <h2 className='text-opacity-75 text-sm'>Lighting Intensity</h2>
                      <input
                         type='number'
                         step={0.1}
@@ -46,11 +36,11 @@ function Scene() {
                         onChange={(event) =>
                            setScene((prev) => ({ ...prev, scene: { ...prev.scene, intensity: event.target.value } }))
                         }
-                        className='w-12 rounded-md hover:ring-2 hover:ring-blue-500 duration-150'
+                        className='w-20 rounded-md dark:bg-neutral-700 p-1 hover:ring-2 hover:ring-blue-500 duration-150'
                      />
                   </div>
                   <div className='flex flex-row justify-between items-center'>
-                     <h2 className='text-opacity-75 text-black text-sm'>Environment</h2>
+                     <h2 className='text-opacity-75 text-sm'>Environment</h2>
                      <Select
                         options={SELECTOPTIONS}
                         value={{
