@@ -18,11 +18,11 @@ import CryptoCoin from "../../assets/CryptoCoin"
 import SodaCan from "../../assets/SodaCan"
 
 const SELECTOPTIONS = [
-   { value: <LowPolyRocket />, label: "Low Poly Rocket", path: "/LowPolyRocket.glb" },
-   { value: <LowPolyRocketNoSmoke />, label: "Low Poly Rocket No Smoke", path: "/LowPolyRocket_NoSmoke.glb" },
-   { value: <Phone />, label: "Phone", path: "/Phone.glb" },
-   { value: <CryptoCoin />, label: "Crypto Coin", path: "/CryptoCoin.glb" },
-   { value: <SodaCan />, label: "Soda Can", path: "/SodaCan.glb" },
+   { value: <LowPolyRocket />, label: "Low Poly Rocket", path: "/glbs/LowPolyRocket.glb" },
+   { value: <LowPolyRocketNoSmoke />, label: "Low Poly Rocket No Smoke", path: "/glbs/LowPolyRocket_NoSmoke.glb" },
+   { value: <Phone />, label: "Phone", path: "/glbs/Phone.glb" },
+   { value: <CryptoCoin />, label: "Crypto Coin", path: "/glbs/CryptoCoin.glb" },
+   { value: <SodaCan />, label: "Soda Can", path: "/glbs/SodaCan.glb" },
 ]
 
 function CharacterSettings() {
