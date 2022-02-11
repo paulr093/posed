@@ -36,7 +36,7 @@ function CharacterSettings() {
    }, [activeModel.path])
 
    return (
-      <div className='flex flex-col flex-grow space-y-3 w-full py-2'>
+      <div className='flex flex-col flex-grow space-y-3 w-full py-2 dark:text-white'>
          <h1 className='font-bold'>Active Model</h1>
          <Select
             options={SELECTOPTIONS}
@@ -56,11 +56,11 @@ function CharacterSettings() {
                      <ChevronRightIcon className={`w-5 h-5 duration-150 ${open ? "transform rotate-90" : ""}`} />
                   </Disclosure.Button>
                   <Disclosure.Panel className={`space-y-2`}>
-                     <h2 className='text-gray-500 text-sm text-center'>Click on the color below to change it</h2>
+                     <h2 className='text-neutral-500 text-sm text-center'>Click on the color below to change it</h2>
                      {Object.entries(materials).map((material, id) => (
                         <div key={id} className='flex justify-between items-center'>
                            {material[0] && (
-                              <h3 key={id} className='text-opacity-75 text-black text-sm'>
+                              <h3 key={id} className='text-opacity-75 text-sm'>
                                  {material[0]}
                               </h3>
                            )}

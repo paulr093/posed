@@ -18,7 +18,7 @@ export const renderSettings = atom({
       },
       scene: {
          intensity: 0.5,
-         environment: "city",
+         environment: "/studio.hdr",
       },
    },
 })

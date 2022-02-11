@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app"
+import { getApp, initializeApp } from "firebase/app"
 import { getAnalytics } from "firebase/analytics"
 
 const firebaseConfig = {
@@ -12,6 +12,14 @@ const firebaseConfig = {
 }
 
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig)
-export const analytics = getAnalytics(app)
 
+function createFirebaseApp(config) {
+   try {
+      return getApp()
+   } catch {
+      return initializeApp(config)
+   }
+}
+
+const firebaseApp = createFirebaseApp(firebaseConfig)
+export const firebaseAnalytics = getAnalytics(firebaseApp)
