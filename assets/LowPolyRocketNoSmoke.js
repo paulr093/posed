@@ -4,6 +4,7 @@ import { useGLTF } from "@react-three/drei"
 export default function LowPolyRocketNoSmoke(props) {
    const group = useRef()
    const { nodes, materials } = useGLTF("/LowPolyRocket_NoSmoke.glb")
+
    return (
       <group ref={group} {...props}>
          <mesh castShadow receiveShadow geometry={nodes.Cylinder.geometry} material={materials.BaseGrey} />

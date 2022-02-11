@@ -1,14 +1,6 @@
 import React, { useRef, useState, useEffect, Suspense } from "react"
 import { Canvas } from "@react-three/fiber"
-import {
-   Stage,
-   OrbitControls,
-   ContactShadows,
-   Stats,
-   useProgress,
-   Html,
-   CycleRaycast,
-} from "@react-three/drei"
+import { Stage, OrbitControls, ContactShadows, Stats, useProgress, Html, CycleRaycast } from "@react-three/drei"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { characterState, renderSettings } from "../recoil/states"
 
@@ -32,7 +24,7 @@ function FiberRender(props) {
 
    return (
       <div className='h-[100vh] w-[75vw]'>
-         <Canvas gl={{ preserveDrawingBuffer: true, antialias: true }} camera={{fov: 75}} dpr={Math.max(dpr, 2)}>
+         <Canvas gl={{ preserveDrawingBuffer: true, antialias: true }} camera={{ fov: 75 }} dpr={Math.max(dpr, 2)}>
             <OrbitControls makeDefault minDistance={1.25} />
 
             {settings.contactShadow.show && (
@@ -49,7 +41,13 @@ function FiberRender(props) {
             {showStats && <Stats showPanel={0} className='stats' {...props} />}
 
             <Suspense fallback={<Loading />}>
-               <Stage shadows={false} contactShadow={false} environment={settings.scene.environment} intensity={settings.scene.intensity} controls={ref}>
+               <Stage
+                  shadows={false}
+                  contactShadow={false}
+                  environment={settings.scene.environment}
+                  intensity={settings.scene.intensity}
+                  controls={ref}
+               >
                   {character.model}
                </Stage>
             </Suspense>

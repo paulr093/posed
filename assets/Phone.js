@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from "react"
 import { Html, useCursor, useGLTF, useTexture } from "@react-three/drei"
 import { useFilePicker } from "use-file-picker"
 
-export default function Phone(props) {
+export default function Phone() {
    const group = useRef()
    const { nodes, materials } = useGLTF("/Phone.glb")
+
    const [hover, setHover] = useState(false)
    const [openFileSelector, { filesContent, loading }] = useFilePicker({
       accept: ".png",
@@ -45,7 +46,7 @@ export default function Phone(props) {
                <h2>Dimensions: 850 x 1850</h2>
             </div>
          </Html>
-         <group ref={group} {...props}>
+         <group ref={group}>
             <mesh castShadow receiveShadow geometry={nodes.Cube002.geometry} material={materials.Screen} />
             <mesh castShadow receiveShadow geometry={nodes.Cube002_1.geometry} material={materials.Bevel} />
             <mesh castShadow receiveShadow geometry={nodes.Cube002_2.geometry} material={nodes.Cube002_2.material} />
