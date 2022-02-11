@@ -49,7 +49,7 @@ function FiberRender(props) {
                >
                   {character.model}
                </Stage>
-               <Environment files={settings.scene.environment} />
+               <Environment path="/hdris/" files={settings.scene.environment} />
             </Suspense>
             <CycleRaycast
                preventDefault={false}
