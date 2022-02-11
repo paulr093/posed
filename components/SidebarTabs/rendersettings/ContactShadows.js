@@ -97,7 +97,7 @@ function ContactShadows() {
                         onChange={(e) =>
                            setSettings({
                               ...settings,
-                              contactShadow: { ...settings.contactShadow, focalLength: e.target.value },
+                              contactShadow: { ...settings.contactShadow, focalLength: parseInt(e.target.value) },
                            })
                         }
                         type='number'
