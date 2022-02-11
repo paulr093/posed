@@ -14,11 +14,15 @@ import RGBtoDecimal from "../../utils/rgbToDecimal"
 import { HexColorInput, RgbColorPicker } from "react-colorful"
 import rgbToHex from "../../utils/rgbToHex"
 import hexToRgb from "../../utils/hexToRGB"
+import CryptoCoin from "../../assets/CryptoCoin"
+import SodaCan from "../../assets/SodaCan"
 
 const SELECTOPTIONS = [
    { value: <LowPolyRocket />, label: "Low Poly Rocket", path: "/LowPolyRocket.glb" },
    { value: <LowPolyRocketNoSmoke />, label: "Low Poly Rocket No Smoke", path: "/LowPolyRocket_NoSmoke.glb" },
    { value: <Phone />, label: "Phone", path: "/Phone.glb" },
+   { value: <CryptoCoin />, label: "Crypto Coin", path: "/CryptoCoin.glb" },
+   { value: <SodaCan />, label: "Soda Can", path: "/SodaCan.glb" },
 ]
 
 function CharacterSettings() {
