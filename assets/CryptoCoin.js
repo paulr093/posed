@@ -3,7 +3,7 @@ import { useGLTF } from '@react-three/drei'
 
 export default function CryptoCoin(props) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('/CryptoCoin.glb')
+  const { nodes, materials } = useGLTF('/glbs/CryptoCoin.glb')
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh castShadow receiveShadow geometry={nodes.Plane.geometry} material={materials.Stonks} />
@@ -25,4 +25,4 @@ export default function CryptoCoin(props) {
   )
 }
 
-useGLTF.preload('/CryptoCoin.glb')
+useGLTF.preload('/glbs/CryptoCoin.glb')

@@ -4,7 +4,7 @@ import { useFilePicker } from "use-file-picker"
 
 export default function Phone() {
    const group = useRef()
-   const { nodes, materials } = useGLTF("/Phone.glb")
+   const { nodes, materials } = useGLTF("/glbs/Phone.glb")
 
    const [hover, setHover] = useState(false)
    const [openFileSelector, { filesContent, loading }] = useFilePicker({
@@ -95,4 +95,4 @@ export default function Phone() {
    )
 }
 
-useGLTF.preload("/Phone.glb")
+useGLTF.preload("/glbs/Phone.glb")

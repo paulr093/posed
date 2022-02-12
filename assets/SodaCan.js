@@ -4,7 +4,7 @@ import { useFilePicker } from "use-file-picker"
 
 export default function SodaCan(props) {
    const group = useRef()
-   const { nodes, materials } = useGLTF("/SodaCan.glb")
+   const { nodes, materials } = useGLTF("/glbs/SodaCan.glb")
 
    const [hover, setHover] = useState(false)
    const [openFileSelector, { filesContent, loading }] = useFilePicker({
@@ -81,4 +81,4 @@ export default function SodaCan(props) {
    )
 }
 
-useGLTF.preload("/SodaCan.glb")
+useGLTF.preload("/glbs/SodaCan.glb")

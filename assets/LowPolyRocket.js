@@ -3,7 +3,7 @@ import { useGLTF } from "@react-three/drei"
 
 export default function LowPolyRocket(props) {
    const group = useRef()
-   const { nodes, materials } = useGLTF("/LowPolyRocket.glb")
+   const { nodes, materials } = useGLTF("/glbs/LowPolyRocket.glb")
 
    return (
       <group ref={group} {...props}>
@@ -32,4 +32,4 @@ export default function LowPolyRocket(props) {
    )
 }
 
-useGLTF.preload("/LowPolyRocket.glb")
+useGLTF.preload("/glbs/LowPolyRocket.glb")

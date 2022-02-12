@@ -1,16 +1,12 @@
 import React from "react"
 import Head from "next/head"
-import Wave from "../components/svg/Wave"
 import Link from "next/link"
-import { mainColor } from "../tailwind/colors"
 
 function Home() {
    return (
       <>
          <Head>
-            <title>Posed</title>
-            <meta name='description' content='Snap photos of fully customizable 3d models!' />
-            <link rel='icon' href='/favicon.ico' />
+            <title>Posed - Home</title>
          </Head>
 
          <div
@@ -48,11 +44,11 @@ function Home() {
 
             <div className='flex flex-col items-center pt-20 space-y-14'>
                <h1 className='w-1/2 text-center font-black text-4xl'>
-                  Browse, customize, and screenshot from our library of 3D models for your UI designs
+                  Browse, customize, and screenshot from our library of 3D models
                </h1>
                <p className={`w-3/4 font-bold text-xl text-center opacity-50 leading-8`}>
                   Posed is a library of 3d models that are fully customizeable. When you have the model how you like it,
-                  hit the screenshot button to export a .png and import it into your deisgns!
+                  hit the screenshot button to export a .png and import it into your designs!
                </p>
 
                <Link href='/viewer' passHref>
