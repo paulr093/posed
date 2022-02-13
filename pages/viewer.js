@@ -1,9 +1,19 @@
 import Head from "next/head"
 import FiberRender from "../components/FiberRender"
 import Sidebar from "../components/Sidebar"
-import { mainColor } from "../tailwind/colors"
+import getPaths from "../utils/getPaths"
 
-export default function Home() {
+export async function getServerSideProps() {
+   const paths = await getPaths()
+
+   return {
+      props: {
+         urls: paths,
+      },
+   }
+}
+
+export default function Home({ urls }) {
    return (
       <>
          <Head>
@@ -16,7 +26,8 @@ export default function Home() {
                   <Sidebar />
                </div>
                <div className={`bg-neutral-50 dark:bg-neutral-700`}>
-                  <FiberRender />
+
+               <FiberRender />
                </div>
             </div>
          </div>

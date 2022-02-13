@@ -1,12 +1,13 @@
 import { Disclosure } from "@headlessui/react"
 import { ChevronRightIcon } from "@heroicons/react/outline"
 import React from "react"
-import { useRecoilState } from "recoil"
-import { renderSettings } from "../../../recoil/states"
 import Select from "react-select"
+import { renderSettings } from "../../../zustand/states"
 
 function Scene() {
-   const [{ scene }, setScene] = useRecoilState(renderSettings)
+   const scene = renderSettings((state) => state.scene)
+   const setScene = renderSettings((state) => state.setScene)
+
    const upperCaseFirst = scene.environment.charAt(0).toUpperCase() + scene.environment.slice(1)
    const SELECTOPTIONS = [
       { value: "studio.hdr", label: "Studio" },
@@ -34,9 +35,7 @@ function Scene() {
                         step={0.1}
                         min={0}
                         value={scene.intensity}
-                        onChange={(event) =>
-                           setScene((prev) => ({ ...prev, scene: { ...prev.scene, intensity: event.target.value } }))
-                        }
+                        onChange={(event) => setScene({ ...scene, intensity: event.target.value })}
                         className='w-20 rounded-md dark:bg-neutral-700 p-1 hover:ring-2 hover:ring-blue-500 duration-150'
                      />
                   </div>
@@ -48,10 +47,8 @@ function Scene() {
                            value: scene.environment,
                            label: upperCaseFirst,
                         }}
-                        onChange={(event) =>
-                           setScene((prev) => ({ ...prev, scene: { ...prev.scene, environment: event.value } }))
-                        }
-                        className="w-32"
+                        onChange={(event) => setScene({ ...scene, environment: event.value })}
+                        className='w-32'
                      />
                   </div>
                </Disclosure.Panel>

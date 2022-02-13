@@ -1,10 +1,10 @@
-export default function DecimalToRGB(r, g, b, condition) {
+export default function DecimalToRGB(r, g, b, stringify) {
     r = r * 255
     g = g * 255
     b = b * 255
     var rgb = {r: r, g: g, b: b}
 
-    if (condition) {
+    if (stringify) {
         return "rgb(" + r + "," + g + "," + b + ")"
     } else {
         return rgb

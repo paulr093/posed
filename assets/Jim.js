@@ -1,8 +1,5 @@
-import React, { useRef, useEffect } from "react"
-import { useGLTF, useProgress } from "@react-three/drei"
-import GUI from "lil-gui"
-import useGui from "../utils/useGui"
-import { useRecoilState } from "recoil"
+import React, { useRef } from "react"
+import { useGLTF } from "@react-three/drei"
 
 export default function Jim(props) {
    const group = useRef()
