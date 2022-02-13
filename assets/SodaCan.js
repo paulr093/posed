@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from "react"
 import { Html, useCursor, useGLTF, useTexture } from "@react-three/drei"
 import { useFilePicker } from "use-file-picker"
+import { activeModel } from "../zustand/states"
+import { setHexFromMaterial } from "../utils/setHexFromMaterial"
 
 export default function SodaCan(props) {
    const group = useRef()
    const { nodes, materials } = useGLTF("/glbs/SodaCan.glb")
-
+   const colors = activeModel((state) => state.colors)
+   const setColors = activeModel((state) => state.setColors)
    const [hover, setHover] = useState(false)
    const [openFileSelector, { filesContent, loading }] = useFilePicker({
       accept: ".png",
@@ -23,6 +26,11 @@ export default function SodaCan(props) {
          setImagePath(filesContent[0]?.content)
       }
    }, [filesContent])
+
+   useEffect(() => {
+      setColors(setHexFromMaterial(materials))
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [])
 
    if (loading) {
       return <Html>Loading...</Html>
@@ -48,8 +56,12 @@ export default function SodaCan(props) {
          </Html>
 
          <group ref={group} {...props} dispose={null}>
-            <mesh castShadow receiveShadow geometry={nodes.Cylinder.geometry} material={nodes.Cylinder.material} />
-            <mesh castShadow receiveShadow geometry={nodes.Cylinder_1.geometry} material={materials.Wrap} />
+            <mesh castShadow receiveShadow geometry={nodes.Cylinder.geometry} material={nodes.Cylinder.material}>
+               <meshStandardMaterial color={colors.Grey} roughness={0.4} metalness={1}/>
+            </mesh>
+            <mesh castShadow receiveShadow geometry={nodes.Cylinder_1.geometry} material={materials.Wrap} >
+               <meshStandardMaterial color={colors.Wrap} roughness={0.2} metalness={1}/>
+            </mesh>
             <mesh
                castShadow
                receiveShadow
@@ -81,4 +93,4 @@ export default function SodaCan(props) {
    )
 }
 
-useGLTF.preload("/glbs/SodaCan.glb")
+// useGLTF.preload("/glbs/SodaCan.glb")

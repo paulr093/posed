@@ -1,10 +1,16 @@
 import React, { useEffect, useRef, useState } from "react"
 import { Html, useCursor, useGLTF, useTexture } from "@react-three/drei"
 import { useFilePicker } from "use-file-picker"
+import { activeModel } from "../zustand/states"
+import { setHexFromMaterial } from "../utils/setHexFromMaterial"
 
 export default function Phone() {
    const group = useRef()
    const { nodes, materials } = useGLTF("/glbs/Phone.glb")
+   const colors = activeModel((state) => state.colors)
+   const setColors = activeModel((state) => state.setColors)
+
+   const ringRoughness = 0.3
 
    const [hover, setHover] = useState(false)
    const [openFileSelector, { filesContent, loading }] = useFilePicker({
@@ -23,6 +29,11 @@ export default function Phone() {
          setImagePath(filesContent[0]?.content)
       }
    }, [filesContent])
+
+   useEffect(() => {
+      setColors(setHexFromMaterial(materials))
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [])
 
    if (loading) {
       return <Html>Loading...</Html>
@@ -47,30 +58,46 @@ export default function Phone() {
             </div>
          </Html>
          <group ref={group}>
-            <mesh castShadow receiveShadow geometry={nodes.Cube002.geometry} material={materials.Screen} />
-            <mesh castShadow receiveShadow geometry={nodes.Cube002_1.geometry} material={materials.Bevel} />
-            <mesh castShadow receiveShadow geometry={nodes.Cube002_2.geometry} material={nodes.Cube002_2.material} />
-            <mesh castShadow receiveShadow geometry={nodes.Cube002_3.geometry} material={materials.Back} />
+            <mesh castShadow receiveShadow geometry={nodes.Cube002.geometry} material={materials.Screen}>
+               <meshStandardMaterial color={colors.Screen} />
+            </mesh>
+            <mesh castShadow receiveShadow geometry={nodes.Cube002_1.geometry} material={materials.Bevel}>
+               <meshStandardMaterial color={colors.Bevel} />
+            </mesh>
+            <mesh castShadow receiveShadow geometry={nodes.Cube002_2.geometry} material={nodes.Cube002_2.material}>
+               <meshStandardMaterial color={colors.Ring} roughness={ringRoughness} metalness={1} />
+            </mesh>
+            <mesh castShadow receiveShadow geometry={nodes.Cube002_3.geometry} material={materials.Back}>
+               <meshStandardMaterial color={colors.Back} />
+            </mesh>
             <mesh
                castShadow
                receiveShadow
                geometry={nodes.LockButton.geometry}
-               material={nodes.LockButton.material}
+               // material={nodes.LockButton.material}
                scale={[0.1375, 0.1375, 0.1375]}
-            />
+            >
+               <meshPhysicalMaterial color={colors.Ring} roughness={ringRoughness} metalness={1} />
+            </mesh>
             <mesh
                castShadow
                receiveShadow
                geometry={nodes.VolumeButtons.geometry}
-               material={nodes.VolumeButtons.material}
+               // material={nodes.VolumeButtons.material}
                scale={[0.1375, 0.1375, 0.1375]}
-            />
+            >
+               <meshPhysicalMaterial color={colors.Ring} transparent={false} roughness={ringRoughness} metalness={1} />
+            </mesh>
             <mesh castShadow receiveShadow geometry={nodes.CameraGlass.geometry} material={materials.CameraGlass}>
-               <meshStandardMaterial color={"black"} transparent={true} opacity={0.2} roughness={0} />
+               <meshStandardMaterial color={colors.CameraGlass} transparent={true} opacity={0.2} roughness={0} />
             </mesh>
             <group rotation={[Math.PI / 2, 0, 0]}>
-               <mesh castShadow receiveShadow geometry={nodes.Cylinder.geometry} material={nodes.Cylinder.material} />
-               <mesh castShadow receiveShadow geometry={nodes.Cylinder_1.geometry} material={materials.Lense} />
+               <mesh castShadow receiveShadow geometry={nodes.Cylinder.geometry} material={nodes.Cylinder.material}>
+                  <meshPhysicalMaterial color={colors.Ring} transparent={false} roughness={ringRoughness} metalness={1} />
+               </mesh>
+               <mesh castShadow receiveShadow geometry={nodes.Cylinder_1.geometry} material={materials.Lense} >
+               <meshPhysicalMaterial color={colors.Lense} transparent={false} roughness={0.2} metalness={1} />
+            </mesh>
             </group>
             <mesh
                castShadow
@@ -95,4 +122,4 @@ export default function Phone() {
    )
 }
 
-useGLTF.preload("/glbs/Phone.glb")
+// useGLTF.preload("/glbs/Phone.glb")

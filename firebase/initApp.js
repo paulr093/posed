@@ -1,5 +1,6 @@
-import { getApp, initializeApp } from "firebase/app"
-import { getAnalytics } from "firebase/analytics"
+import firebase from "firebase/compat/app"
+import "firebase/compat/analytics"
+import "firebase/compat/storage"
 
 const firebaseConfig = {
    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -13,13 +14,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 
-function createFirebaseApp(config) {
-   try {
-      return getApp()
-   } catch {
-      return initializeApp(config)
-   }
-}
+const app = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app()
 
-const firebaseApp = createFirebaseApp(firebaseConfig)
-export const firebaseAnalytics = getAnalytics(firebaseApp)
+const storage = app.storage()
+const analytics = app.analytics()
+
+export { storage, analytics }

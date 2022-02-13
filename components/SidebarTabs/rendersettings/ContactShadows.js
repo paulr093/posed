@@ -1,11 +1,11 @@
 import { Disclosure, Switch } from "@headlessui/react"
 import { ChevronRightIcon } from "@heroicons/react/outline"
 import React from "react"
-import { useRecoilState } from "recoil"
-import { renderSettings } from "../../../recoil/states"
+import { renderSettings } from "../../../zustand/states"
 
 function ContactShadows() {
-   const [settings, setSettings] = useRecoilState(renderSettings)
+   const settings = renderSettings((state) => state.contactShadow)
+   const setSettings = renderSettings((state) => state.setContactShadow)
 
    return (
       <Disclosure defaultOpen={true}>
@@ -23,18 +23,16 @@ function ContactShadows() {
                   <div className='flex flex-row justify-between items-center'>
                      <h1 className='text-opacity-75 text-sm'>Show Shadows</h1>
                      <Switch
-                        checked={settings.contactShadow.show}
-                        onChange={(e) =>
-                           setSettings({ ...settings, contactShadow: { ...settings.contactShadow, show: e } })
-                        }
+                        checked={settings.show}
+                        onChange={(e) => setSettings({ ...settings, show: e })}
                         className={`${
-                           settings.contactShadow.show ? "bg-blue-500" : "bg-gray-200"
+                           settings.show ? "bg-blue-500" : "bg-gray-200"
                         } relative inline-flex items-center h-6 rounded-full w-11`}
                      >
                         <span className='sr-only'>Enable contact shadows</span>
                         <span
                            className={`${
-                              settings.contactShadow.show ? "translate-x-6" : "translate-x-1"
+                              settings.show ? "translate-x-6" : "translate-x-1"
                            } inline-block w-4 h-4 transform bg-white rounded-full`}
                         />
                      </Switch>
@@ -42,14 +40,14 @@ function ContactShadows() {
                   <div className='flex flex-row justify-between items-center text-neutral-900 dark:text-white'>
                      <h1 className='text-opacity-75 text-sm'>Blur</h1>
                      <input
-                        value={settings.contactShadow.shadowBlur}
+                        value={settings.shadowBlur}
                         step={0.5}
                         min={0}
                         max={10}
                         onChange={(e) =>
                            setSettings({
                               ...settings,
-                              contactShadow: { ...settings.contactShadow, shadowBlur: e.target.value },
+                              shadowBlur: e.target.value,
                            })
                         }
                         type='number'
@@ -59,11 +57,11 @@ function ContactShadows() {
                   <div className='flex flex-row justify-between items-center'>
                      <h1 className='text-opacity-75 text-sm'>Opacity</h1>
                      <input
-                        value={settings.contactShadow.shadowOpacity}
+                        value={settings.shadowOpacity}
                         onChange={(e) =>
                            setSettings({
                               ...settings,
-                              contactShadow: { ...settings.contactShadow, shadowOpacity: e.target.value },
+                              shadowOpacity: e.target.value,
                            })
                         }
                         type='number'
@@ -76,15 +74,15 @@ function ContactShadows() {
                   <div className='flex flex-row justify-between items-center'>
                      <h1 className='text-opacity-75 text-sm'>Resolution</h1>
                      <input
-                        value={settings.contactShadow.shadowRes}
+                        value={settings.shadowRes}
                         onChange={(e) =>
                            setSettings({
                               ...settings,
-                              contactShadow: { ...settings.contactShadow, shadowRes: parseInt(e.target.value) },
+                              shadowRes: parseInt(e.target.value),
                            })
                         }
                         type='number'
-                        step={settings.contactShadow.shadowRes * 2}
+                        step={settings.shadowRes * 2}
                         min={0}
                         max={4096}
                         className='w-1/4 p-1 bg-white dark:bg-neutral-700 bg-opacity-75 rounded-md appearance-none outline-none focus:ring-2 focus:ring-blue-500 duration-150'
@@ -93,11 +91,11 @@ function ContactShadows() {
                   <div className='flex flex-row justify-between items-center'>
                      <h1 className='text-opacity-75 text-sm'>Focal Length</h1>
                      <input
-                        value={settings.contactShadow.focalLength}
+                        value={settings.focalLength}
                         onChange={(e) =>
                            setSettings({
                               ...settings,
-                              contactShadow: { ...settings.contactShadow, focalLength: parseInt(e.target.value) },
+                              focalLength: parseInt(e.target.value),
                            })
                         }
                         type='number'
