@@ -1,19 +1,8 @@
 import Head from "next/head"
 import FiberRender from "../components/FiberRender"
 import Sidebar from "../components/Sidebar"
-import getPaths from "../utils/getPaths"
 
-export async function getServerSideProps() {
-   const paths = await getPaths()
-
-   return {
-      props: {
-         urls: paths,
-      },
-   }
-}
-
-export default function Home({ urls }) {
+export default function Home() {
    return (
       <>
          <Head>
