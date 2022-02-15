@@ -6,7 +6,7 @@ import { setHexFromMaterial } from "../utils/setHexFromMaterial"
 export default function CryptoCoin(props) {
    const group = useRef()
    const { nodes, materials } = useGLTF("/glbs/CryptoCoin.glb")
-   const [texture] = useTexture(["/crypto.jpg"])
+   // const [texture] = useTexture(["/crypto.jpg"])
 
    const colors = activeModel((state) => state.colors)
    const setColors = activeModel((state) => state.setColors)

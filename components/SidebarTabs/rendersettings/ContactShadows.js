@@ -51,7 +51,7 @@ function ContactShadows() {
                            })
                         }
                         type='number'
-                        className='w-1/4 p-1 bg-white dark:bg-neutral-700 bg-opacity-75 rounded-md appearance-none outline-none focus:ring-2 focus:ring-blue-500 duration-150'
+                        className='w-20 rounded-md dark:bg-neutral-700 p-1 hover:ring-2 hover:ring-blue-500 duration-150'
                      />
                   </div>
                   <div className='flex flex-row justify-between items-center'>
@@ -68,7 +68,7 @@ function ContactShadows() {
                         step={0.1}
                         min={0}
                         max={1}
-                        className='w-1/4 p-1 bg-white dark:bg-neutral-700 bg-opacity-75 rounded-md appearance-none outline-none focus:ring-2 focus:ring-blue-500 duration-150'
+                        className='w-20 rounded-md dark:bg-neutral-700 p-1 hover:ring-2 hover:ring-blue-500 duration-150'
                      />
                   </div>
                   <div className='flex flex-row justify-between items-center'>
@@ -85,7 +85,7 @@ function ContactShadows() {
                         step={settings.shadowRes * 2}
                         min={0}
                         max={4096}
-                        className='w-1/4 p-1 bg-white dark:bg-neutral-700 bg-opacity-75 rounded-md appearance-none outline-none focus:ring-2 focus:ring-blue-500 duration-150'
+                        className='w-20 rounded-md dark:bg-neutral-700 p-1 hover:ring-2 hover:ring-blue-500 duration-150'
                      />
                   </div>
                   <div className='flex flex-row justify-between items-center'>
@@ -99,7 +99,7 @@ function ContactShadows() {
                            })
                         }
                         type='number'
-                        className='w-1/4 p-1 bg-white dark:bg-neutral-700 bg-opacity-75 rounded-md appearance-none outline-none focus:ring-2 focus:ring-blue-500 duration-150'
+                        className='w-20 rounded-md dark:bg-neutral-700 p-1 hover:ring-2 hover:ring-blue-500 duration-150'
                      />
                   </div>
                </Disclosure.Panel>
