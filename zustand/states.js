@@ -23,3 +23,37 @@ export const renderSettings = create((set) => ({
    setContactShadow: (action) => set(() => ({ contactShadow: action })),
    setScene: (action) => set(() => ({ scene: action })),
 }))
+
+export const modelTransforms = create((set) => ({
+   // Set this to true to show transforms in Sidebar
+   show: false,
+   setShow: (action) => set(() => ({ show: action})),
+
+   // head
+   head: { x: 0, y: 0, z: 0 },
+   setHead: (action) => set(() => ({ head: action })),
+
+   // body
+   body: { x: 0, y: 0, z: 0 },
+   setBody: (action) => set(() => ({ body: action })),
+
+   // arms
+   upperArmL: { x: 0, y: 0, z: -1.5 },
+   upperArmR: { x: 0, y: 0, z: 1.5 },
+   lowerArmL: { x: 0, y: 0, z: 0 },
+   lowerArmR: { x: 0, y: 0, z: 0 },
+   setUpperArmL: (action) => set(() => ({ upperArmL: action })),
+   setUpperArmR: (action) => set(() => ({ upperArmR: action })),
+   setLowerArmL: (action) => set(() => ({ lowerArmL: action })),
+   setLowerArmR: (action) => set(() => ({ lowerArmR: action })),
+
+   // legs
+   upperLegR: { x: 3.15, y: 1.5, z: 0 },
+   upperLegL: { x: -3.15, y: -1.5, z: 0 },
+   lowerLegR: { x: 0, y: 0, z: 0 },
+   lowerLegL: { x: 0, y: 0, z: 0 },
+   setUpperLegR: (action) => set(() => ({ upperLegR: action })),
+   setUpperLegL: (action) => set(() => ({ upperLegL: action })),
+   setLowerLegR: (action) => set(() => ({ lowerLegR: action })),
+   setLowerLegL: (action) => set(() => ({ lowerLegL: action })),
+}))
