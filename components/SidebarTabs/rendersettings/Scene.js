@@ -42,13 +42,14 @@ function Scene() {
                   <div className='flex flex-row justify-between items-center'>
                      <h2 className='text-opacity-75 text-sm'>Environment</h2>
                      <Select
+                        className='my-react-select-container w-2/5'
+                        classNamePrefix='my-react-select'
                         options={SELECTOPTIONS}
                         value={{
                            value: scene.environment,
                            label: upperCaseFirst,
                         }}
                         onChange={(event) => setScene({ ...scene, environment: event.value })}
-                        className='w-32'
                      />
                   </div>
                </Disclosure.Panel>

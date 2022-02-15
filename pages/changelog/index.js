@@ -1,3 +1,4 @@
+import Link from "next/link"
 import React from "react"
 import Header from "../../components/shared/Header"
 
@@ -12,11 +13,26 @@ function Home() {
 
             <div className='flex flex-col space-y-2'>
                <div>
+                  <h2 className='font-semibold text-xl'>v0.0.3</h2>
+                  <h3 className='text-sm opacity-50'>February 15th, 2022</h3>
+                  <p className='px-5'>
+                     Introducing the changelog! We handled some mobile and dark mode styles. Added a brand new, full
+                     transformable
+                     <Link href='/viewer/Low Poly Spaceman' passHref>
+                        <span className='text-blue-500 hover:text-blue-700 cursor-pointer'>{" "}Low Poly Spaceman</span>
+                     </Link>
+                     ! We have also introduced Dynamic Routing so that you can share with your friends the link to a
+                     specific model.
+                  </p>
+               </div>
+
+               <div>
                   <h2 className='font-semibold text-xl'>v0.0.2</h2>
                   <h3 className='text-sm opacity-50'>February 13th, 2022</h3>
                   <p className='px-5'>
                      We switched to a more Three.js compatible global state manager. Models were previously being loaded
-                     all at once and now will be loaded on request. Introduction of the homepage and changelog. Changed some styles up 😎.
+                     all at once and now will be loaded on request. Introduction of the homepage and changelog. Changed
+                     some styles up 😎.
                   </p>
                </div>
 
