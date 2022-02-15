@@ -27,7 +27,7 @@ function Home() {
                   hit the screenshot button to export a .png and import it into your designs!
                </p>
 
-               <Link href='/viewer' passHref>
+               <Link href='/viewer/Low Poly Rocket' passHref>
                   <button className='p-5 rounded-full font-bold bg-gradient-to-r from-blue-500 to-emerald-500 text-white'>
                      Go to 3D viewer
                   </button>

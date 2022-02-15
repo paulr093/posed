@@ -9,7 +9,7 @@ function Header() {
          </Link>
 
          <div className='flex items-center text-sm space-x-3'>
-            <Link href='/viewer' passHref>
+            <Link href='/viewer/Low Poly Rocket' passHref>
                <p
                   className={`select-none cursor-pointer p-2 hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded-md duration-150 font-medium`}
                >

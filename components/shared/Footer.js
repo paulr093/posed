@@ -15,7 +15,7 @@ function Footer() {
             <div className='flex justify-between sm:px-12 w-3/4'>
                <div className='flex flex-col space-y-3'>
                   <h4 className='font-medium'>Explore</h4>
-                  <Link href='/viewer' passHref>
+                  <Link href='/viewer/Low Poly Rocket' passHref>
                      <h5 className='text-sm opacity-50 hover:text-blue-500 cursor-pointer'>3D Viewer</h5>
                   </Link>
                   <Link href='/changelog' passHref>
