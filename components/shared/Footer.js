@@ -6,7 +6,7 @@ function Footer() {
       <footer>
          <div className='md:px-20 px-3 py-10 flex justify-between w-screen dark:text-white'>
             <div className='flex flex-col space-y-3'>
-               <h3 className='text-left font-gugi text-xl '>Posed</h3>
+               <h4 className='text-left font-gugi text-xl '>Posed</h4>
                <p className='w-28 text-xs opacity-50'>
                   Fully customizable, production-ready models to snapshot and use within seconds.
                </p>

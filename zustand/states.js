@@ -5,6 +5,17 @@ export const activeModel = create((set) => ({
    setLabel: (action) => set(() => ({ label: action })),
    colors: {},
    setColors: (action) => set(() => ({ colors: action })),
+   metalness: 0,
+   setMetalness: (action) => set(() => ({metalness: action})),
+   roughness: 0.5,
+   setRoughness: (action) => set(() => ({roughness: action})),
+}))
+
+export const authData = create((set) => ({
+   loading: false,
+   setLoading: (action) => set(() => ({ loading: action})),
+   userData: {},
+   setUserData: (action) => set(() => ({userData: action})),
 }))
 
 export const renderSettings = create((set) => ({

@@ -1,6 +1,12 @@
-import firebase from "firebase/compat/app"
-import "firebase/compat/analytics"
-import "firebase/compat/storage"
+import { initializeApp } from "firebase/app"
+import { getAnalytics } from "firebase/analytics"
+import {
+   createUserWithEmailAndPassword,
+   getAuth,
+   signInWithEmailAndPassword,
+   signOut,
+} from "firebase/auth"
+import { getFirestore, collection, addDoc } from "firebase/firestore"
 
 const firebaseConfig = {
    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -14,9 +20,31 @@ const firebaseConfig = {
 
 // Initialize Firebase
 
-const app = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app()
+const app = initializeApp(firebaseConfig)
 
-const storage = app.storage()
-const analytics = app.analytics()
+const analytics = getAnalytics(app)
 
-export { storage, analytics }
+// Auth
+const auth = getAuth()
+
+// Sign In Existing
+export async function SignInExisting(email, password) {
+   await signInWithEmailAndPassword(auth, email, password)
+}
+
+export async function CreateUser(email, password) {
+   await createUserWithEmailAndPassword(auth, email, password)
+}
+
+export async function SignOut() {
+   await signOut(auth)
+}
+
+export { analytics, auth }
+
+// firestore
+export const db = getFirestore()
+
+export async function setUserBaseData(email) {
+   await addDoc(collection(db, "users"), { email: email, premium: false })
+}

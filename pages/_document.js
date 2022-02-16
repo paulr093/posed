@@ -6,6 +6,8 @@ class MyDocument extends Document {
          <Html>
             <Head>
                <meta name='description' content='Snap photos of fully customizable 3d models!' />
+               <meta name="keywords" content="3D, Three.js, Illustration, 3D Viewer, Web Design, UI Design, UX, UI, UX Design" />
+               <meta name="author" content="Paul Richan" />
                <link rel='icon' href='/favicon.ico' />
 
                <link rel='preconnect' href='https://fonts.googleapis.com' />

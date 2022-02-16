@@ -3,12 +3,26 @@ import { Html, useCursor, useGLTF, useTexture } from "@react-three/drei"
 import { useFilePicker } from "use-file-picker"
 import { activeModel } from "../zustand/states"
 import { setHexFromMaterial } from "../utils/setHexFromMaterial"
+import { MaterialObj } from "../utils/materialObj"
 
 export default function SodaCan(props) {
    const group = useRef()
    const { nodes, materials } = useGLTF("/glbs/SodaCan.glb")
+
    const colors = activeModel((state) => state.colors)
    const setColors = activeModel((state) => state.setColors)
+   const roughness = activeModel((state) => state.roughness)
+   const setRoughness = activeModel((state) => state.setRoughness)
+   const metalness = activeModel((state) => state.metalness)
+   const setMetalness = activeModel((state) => state.setMetalness)
+
+   useEffect(() => {
+      setColors(setHexFromMaterial(materials))
+      setRoughness(MaterialObj(materials).roughness)
+      setMetalness(MaterialObj(materials).metalness)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [])
+
    const [hover, setHover] = useState(false)
    const [openFileSelector, { filesContent, loading }] = useFilePicker({
       accept: ".png",
@@ -26,11 +40,6 @@ export default function SodaCan(props) {
          setImagePath(filesContent[0]?.content)
       }
    }, [filesContent])
-
-   useEffect(() => {
-      setColors(setHexFromMaterial(materials))
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [])
 
    if (loading) {
       return <Html>Loading...</Html>
@@ -57,10 +66,10 @@ export default function SodaCan(props) {
 
          <group ref={group} {...props} dispose={null}>
             <mesh castShadow receiveShadow geometry={nodes.Cylinder.geometry} material={nodes.Cylinder.material}>
-               <meshStandardMaterial color={colors.Grey} roughness={0.4} metalness={1}/>
+               <meshStandardMaterial color={colors.Grey} roughness={roughness.Grey} metalness={metalness.Grey} />
             </mesh>
-            <mesh castShadow receiveShadow geometry={nodes.Cylinder_1.geometry} material={materials.Wrap} >
-               <meshStandardMaterial color={colors.Wrap} roughness={0.2} metalness={1}/>
+            <mesh castShadow receiveShadow geometry={nodes.Cylinder_1.geometry} material={materials.Wrap}>
+               <meshStandardMaterial color={colors.Wrap} roughness={roughness.Wrap} metalness={metalness.Wrap} />
             </mesh>
             <mesh
                castShadow

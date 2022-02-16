@@ -13,6 +13,14 @@ function Home() {
 
             <div className='flex flex-col space-y-2'>
                <div>
+                  <h2 className='font-semibold text-xl'>v0.0.4</h2>
+                  <h3 className='text-sm opacity-50'>February 16th, 2022</h3>
+                  <p className='px-5'>
+                     You can now change the roughness and metalness on every color, adding another layer of customization.
+                  </p>
+               </div>
+
+               <div>
                   <h2 className='font-semibold text-xl'>v0.0.3</h2>
                   <h3 className='text-sm opacity-50'>February 15th, 2022</h3>
                   <p className='px-5'>
