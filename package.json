@@ -5,13 +5,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cypress": "cypress open"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.3",
     "@heroicons/react": "^1.0.5",
     "@react-three/drei": "^8.8.0",
     "@react-three/fiber": "^7.0.26",
+    "cypress": "^9.5.0",
     "file-saver": "^2.0.5",
     "firebase": "^9.6.6",
     "lil-gui": "^0.16.0",
