@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { CreateUser, setUserBaseData } from "../../../firebase/initApp"
+import { CreateUser } from "../../../firebase/initApp"
 import { authData } from "../../../zustand/states"
 import Spinner from "../Spinner"
 
@@ -48,17 +48,13 @@ function CreateAccount() {
          <button
             onClick={() => {
                if (password === passwordAgain) {
-                  CreateUser(email, password)
-                     .then(() => {
-                        setLoading(true)
-                        setUserBaseData(email)
-                     })
-                     .then(() => {
-                        setEmail("")
-                        setPassword("")
-                        setPasswordAgain("")
-                        setLoading(false)
-                     })
+                  CreateUser(email, password).then(() => {
+                     setLoading(true)
+                     setEmail("")
+                     setPassword("")
+                     setPasswordAgain("")
+                     setLoading(false)
+                  })
                }
             }}
             className='bg-gradient-to-r from-blue-500 to-emerald-500 text-white font-medium rounded-md p-1 w-3/4 flex items-center justify-center'

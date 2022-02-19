@@ -1,18 +1,43 @@
-import { collection, query, where } from "firebase/firestore"
+import axios from "axios"
+import { getAuth, signOut } from "firebase/auth"
+import { doc } from "firebase/firestore"
+import { useRouter } from "next/router"
 import React from "react"
-import { useCollectionDataOnce } from "react-firebase-hooks/firestore"
-import { auth, db, SignOut } from "../../../firebase/initApp"
-import { authData } from "../../../zustand/states"
+import { useAuthState } from "react-firebase-hooks/auth"
+import { useDocumentData } from "react-firebase-hooks/firestore"
+import { db } from "../../../firebase/initApp"
 import Spinner from "../Spinner"
 
 function ProfilePopover() {
-   const setLoading = authData((state) => state.setLoading)
-   const user = auth.currentUser
-   const [snapshot, loading, error] = useCollectionDataOnce(
-      query(collection(db, "users"), where("email", "==", user.email))
-   )
+   const router = useRouter()
+   const auth = getAuth()
+   const [user, loadingUser] = useAuthState(auth)
+   const [docData, loadingDoc, errorDoc] = useDocumentData(doc(db, "users", user.uid))
 
-   if (loading) {
+   const purchasePremiumClick = async () => {
+      if (!loadingUser) {
+         await axios
+            .post("/api/stripe/payment", { userId: user.uid })
+            .then((res) => {
+               router.push(res.data)
+            })
+      } else {
+         console.log("Must be signed in first!")
+      }
+   }
+
+   const manageSubscriptionClick = async () => {
+      if (!loadingDoc) {
+         await axios.post("/api/stripe/billingPortal", { stripeId: docData.stripeId }).then((res) => {
+            router.push(res.data)
+            // console.log(res.data)
+         })
+      } else {
+         console.log("must be signed in")
+      }
+   }
+
+   if (loadingUser) {
       return (
          <div className='w-52 h-48 flex justify-center items-center'>
             <Spinner />
@@ -28,15 +53,23 @@ function ProfilePopover() {
 
          <div className='flex flex-col justify-evenly h-full item-center py-2'>
             <h2>
-               Account status: <span className='font-medium'>{snapshot[0]?.premium ? "Premium" : "Free"}</span>
+               Account status: <span className='font-medium'>{docData?.premium ? "Premium" : "Free"}</span>
             </h2>
             {/* React Stripe */}
-            {/* <button className='text-blue-500'>Purchase Premium</button> */}
+            {!docData?.premium ? (
+               <button className='text-blue-500' onClick={purchasePremiumClick}>
+                  Purchase Premium
+               </button>
+            ) : (
+               <button className='text-blue-500' onClick={manageSubscriptionClick}>
+                  Manage Subscription
+               </button>
+            )}
          </div>
 
          <button
             onClick={() => {
-               SignOut()
+               signOut(auth)
                   .then(() => setLoading(true))
                   .then(() => setLoading(false))
             }}

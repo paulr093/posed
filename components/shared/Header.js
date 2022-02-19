@@ -5,9 +5,8 @@ import { Popover, Transition } from "@headlessui/react"
 import Auth from "./Auth"
 
 function Header() {
-
    return (
-      <div className='flex w-full h-20 py-16 items-center justify-between'>
+      <div className='flex w-full h-20 px-3 py-16 items-center justify-between'>
          <Link href='/' passHref>
             <h1 className='font-bold text-3xl font-gugi self-center select-none cursor-pointer'>POSED</h1>
          </Link>
@@ -15,7 +14,7 @@ function Header() {
          <div className='flex items-center text-sm space-x-3'>
             <Link href='/viewer/Low Poly Rocket' passHref>
                <p
-                  className={`select-none cursor-pointer p-2 hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded-md duration-150 font-medium`}
+                  className={`select-none cursor-pointer p-2 hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded-md duration-150 font-medium hidden md:flex `}
                >
                   3D Viewer
                </p>
@@ -23,7 +22,7 @@ function Header() {
 
             <Link href='/changelog' passHref>
                <p
-                  className={`select-none cursor-pointer p-2 hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded-md duration-150 font-medium`}
+                  className={`select-none cursor-pointer p-2 hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded-md duration-150 font-medium hidden md:flex `}
                >
                   Changelog
                </p>
@@ -44,7 +43,7 @@ function Header() {
                   leaveFrom='transition opacity-100'
                   leaveTo='transition opacity-0'
                >
-                  <Popover.Panel className='absolute z-10 right-28 mt-3 '>
+                  <Popover.Panel className='absolute z-10 right-6 md:right-28 mt-3 '>
                      <div className='bg-neutral-200 dark:bg-neutral-800 min-w-40 min-h-40 px-5 py-3 flex flex-col items-center space-y-2 rounded-md backdrop-blur-md'>
                         <Auth />
                      </div>

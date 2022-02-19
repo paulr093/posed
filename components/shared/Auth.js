@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react"
 import Login from "./auth/Login"
 import CreateAccount from "./auth/CreateAccount"
 import ProfilePopover from "./auth/ProfilePopover"
-import { auth } from "../../firebase/initApp"
 import { useAuthState } from "react-firebase-hooks/auth"
+import { getAuth } from "firebase/auth"
+import Spinner from "./Spinner"
 
 function Auth() {
+   const auth = getAuth()
    const [isLogin, setIsLogin] = useState(true)
    const [isCreateAccount, setIsCreateAccount] = useState(false)
    const [user, loading, error] = useAuthState(auth)
@@ -21,6 +23,14 @@ function Auth() {
 
    if (user) {
       return <ProfilePopover />
+   }
+
+   if (loading) {
+      return (
+         <div className='w-52 h-48 flex flex-col space-y-3 items-center justify-center'>
+            <Spinner />
+         </div>
+      )
    }
 
    return (

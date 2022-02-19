@@ -1,12 +1,7 @@
 import { initializeApp } from "firebase/app"
 import { getAnalytics } from "firebase/analytics"
-import {
-   createUserWithEmailAndPassword,
-   getAuth,
-   signInWithEmailAndPassword,
-   signOut,
-} from "firebase/auth"
-import { getFirestore, collection, addDoc } from "firebase/firestore"
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth"
+import { getFirestore, collection, addDoc, doc, setDoc } from "firebase/firestore"
 
 const firebaseConfig = {
    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -24,27 +19,28 @@ const app = initializeApp(firebaseConfig)
 
 const analytics = getAnalytics(app)
 
-// Auth
-const auth = getAuth()
-
 // Sign In Existing
 export async function SignInExisting(email, password) {
    await signInWithEmailAndPassword(auth, email, password)
 }
 
 export async function CreateUser(email, password) {
-   await createUserWithEmailAndPassword(auth, email, password)
+   const auth = getAuth()
+   await createUserWithEmailAndPassword(auth, email, password).then(async (creds) => {
+      const user = creds.user
+      await setUserBaseData(user.uid, user.email)
+   })
 }
 
 export async function SignOut() {
    await signOut(auth)
 }
 
-export { analytics, auth }
+export { analytics }
 
 // firestore
 export const db = getFirestore()
 
-export async function setUserBaseData(email) {
-   await addDoc(collection(db, "users"), { email: email, premium: false })
+export async function setUserBaseData(id, email) {
+   await setDoc(doc(db, "users", id), { email: email, premium: false })
 }

@@ -1,13 +1,13 @@
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import React, { useState } from "react"
-import { SignInExisting } from "../../../firebase/initApp"
-import { authData } from "../../../zustand/states"
+import { useAuthState } from "react-firebase-hooks/auth"
 import Spinner from "../Spinner"
 
 function Login() {
    const [email, setEmail] = useState("")
    const [password, setPassword] = useState("")
-   const setLoading = authData((state) => state.setLoading)
-   const loading = authData((state) => state.loading)
+   const auth = getAuth()
+   const [user, loading, error] = useAuthState(auth)
 
    return (
       <>
@@ -34,13 +34,10 @@ function Login() {
          </div>
          <button
             onClick={() => {
-               SignInExisting(email, password)
-                  .then(() => setLoading(true))
-                  .then(() => {
-                     setEmail("")
-                     setPassword("")
-                     setLoading(false)
-                  })
+               signInWithEmailAndPassword(auth, email, password).then(() => {
+                  setEmail("")
+                  setPassword("")
+               })
             }}
             className='bg-gradient-to-r from-blue-500 to-emerald-500 text-white font-medium rounded-md p-1 w-3/4 items-center flex justify-center'
          >
