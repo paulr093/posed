@@ -11,6 +11,17 @@ export const activeModel = create((set) => ({
    setRoughness: (action) => set(() => ({ roughness: action })),
 }))
 
+export const modelImage = create((set) => ({
+   showImageSettings: false,
+   setShowImageSettings: (action) => set(() => ({ showImageSettings: action })),
+   image: "/macbook.png",
+   setImage: (action) => set(() => ({ image: action })),
+   dimensions: "",
+   setDimensions: (action) => set(() => ({ dimensions: action})),
+   template: "",
+   setTemplate: (action) => set(() => ({ template: action}))
+}))
+
 export const authData = create((set) => ({
    loading: false,
    setLoading: (action) => set(() => ({ loading: action })),

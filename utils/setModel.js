@@ -3,6 +3,7 @@ import CryptoCoin from "../assets/CryptoCoin"
 import LowPolyRocket from "../assets/LowPolyRocket"
 import LowPolyRocketNoSmoke from "../assets/LowPolyRocketNoSmoke"
 import LowPolySpaceman from "../assets/LowPolySpaceman"
+import M1Pro14 from "../assets/M1Pro14"
 import Phone from "../assets/Phone"
 import SodaCan from "../assets/SodaCan"
 
@@ -20,6 +21,8 @@ export default function setModel(label) {
           return <SodaCan />
        case "Low Poly Spaceman":
           return <LowPolySpaceman />
+       case "Macbook":
+          return <M1Pro14 />
        default:
           return (
              <Html>
