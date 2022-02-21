@@ -17,7 +17,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 
-const analytics = getAnalytics(app)
+const analytics = typeof window !== "undefined" && getAnalytics(app)
 
 // Sign In Existing
 export async function SignInExisting(email, password) {
