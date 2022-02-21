@@ -7,6 +7,10 @@ import { activeModel } from "../../../zustand/states"
 function Colors() {
    const colors = activeModel((state) => state.colors)
    const setColors = activeModel((state) => state.setColors)
+   const roughness = activeModel((state) => state.roughness)
+   const setRoughness = activeModel((state) => state.setRoughness)
+   const metalness = activeModel((state) => state.metalness)
+   const setMetalness = activeModel((state) => state.setMetalness)
 
    return (
       <Disclosure defaultOpen={true}>
@@ -35,7 +39,7 @@ function Colors() {
                               ></Popover.Button>
                            )}
 
-                           <Popover.Panel className='absolute z-10 right-0 flex flex-col space-y-2 items-center'>
+                           <Popover.Panel className='absolute z-10 right-0 flex flex-col space-y-2 items-center bg-neutral-400 p-2 rounded-md bg-opacity-50 backdrop-blur-sm'>
                               <HexColorPicker
                                  color={color[1]}
                                  onChange={(event) => setColors({ ...colors, [color[0]]: event })}
@@ -45,6 +49,10 @@ function Colors() {
                                  className='ring-2 rounded-md p-1 ring-neutral-500 hover:ring-blue-600 focus:ring-blue-600 duration-150 dark:bg-neutral-700 outline-none'
                                  onChange={(event) => setColors({ ...colors, [color[0]]: event })}
                               />
+                              <label>Roughness</label>
+                              <input type="range" min={0} step={0.01} max={1} value={roughness[color[0]]} onChange={({target}) => setRoughness({...roughness, [color[0]]: target.value})} />
+                              <label>Metalness</label>
+                              <input type="range" min={0} step={0.01} max={1} value={metalness[color[0]]} onChange={({target}) => setMetalness({...metalness, [color[0]]: target.value})} />
                            </Popover.Panel>
                         </Popover>
                      </div>

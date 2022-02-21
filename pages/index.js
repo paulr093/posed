@@ -14,8 +14,6 @@ function Home() {
          <div
             className={`flex flex-col overflow-x-hidden items-center px-4 md:px-28 bg-neutral-50 min-h-screen min-w-screen dark:bg-neutral-900 dark:text-white`}
          >
-            {/* <Wave className='sticky top-0 backdrop-blur-sm' /> */}
-
             <Header />
 
             <div className='flex flex-col items-center pt-20 space-y-14'>

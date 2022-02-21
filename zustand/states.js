@@ -5,6 +5,28 @@ export const activeModel = create((set) => ({
    setLabel: (action) => set(() => ({ label: action })),
    colors: {},
    setColors: (action) => set(() => ({ colors: action })),
+   metalness: 0,
+   setMetalness: (action) => set(() => ({ metalness: action })),
+   roughness: 0.5,
+   setRoughness: (action) => set(() => ({ roughness: action })),
+}))
+
+export const modelImage = create((set) => ({
+   showImageSettings: false,
+   setShowImageSettings: (action) => set(() => ({ showImageSettings: action })),
+   image: "/macbook.png",
+   setImage: (action) => set(() => ({ image: action })),
+   dimensions: "",
+   setDimensions: (action) => set(() => ({ dimensions: action})),
+   template: "",
+   setTemplate: (action) => set(() => ({ template: action}))
+}))
+
+export const authData = create((set) => ({
+   loading: false,
+   setLoading: (action) => set(() => ({ loading: action })),
+   userData: {},
+   setUserData: (action) => set(() => ({ userData: action })),
 }))
 
 export const renderSettings = create((set) => ({
@@ -27,7 +49,7 @@ export const renderSettings = create((set) => ({
 export const modelTransforms = create((set) => ({
    // Set this to true to show transforms in Sidebar
    show: false,
-   setShow: (action) => set(() => ({ show: action})),
+   setShow: (action) => set(() => ({ show: action })),
 
    // head
    head: { x: 0, y: 0, z: 0 },
@@ -56,4 +78,10 @@ export const modelTransforms = create((set) => ({
    setUpperLegL: (action) => set(() => ({ upperLegL: action })),
    setLowerLegR: (action) => set(() => ({ lowerLegR: action })),
    setLowerLegL: (action) => set(() => ({ lowerLegL: action })),
+}))
+
+// Stripe
+export const stripeData = create((set) => ({
+   priceId: null,
+   setPriceId: (action) => set(() => ({ priceId: action })),
 }))

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react"
 import { useGLTF } from "@react-three/drei"
 import { activeModel, modelTransforms } from "../zustand/states"
 import { setHexFromMaterial } from "../utils/setHexFromMaterial"
+import { MaterialObj } from "../utils/materialObj"
 
 export default function LowPolySpaceman(props) {
    const group = useRef()
@@ -19,8 +20,19 @@ export default function LowPolySpaceman(props) {
    const upperLegRTransforms = modelTransforms((state) => state.upperLegR)
    const lowerLegRTransforms = modelTransforms((state) => state.lowerLegR)
 
-   const setColors = activeModel((state) => state.setColors)
    const colors = activeModel((state) => state.colors)
+   const setColors = activeModel((state) => state.setColors)
+   const roughness = activeModel((state) => state.roughness)
+   const setRoughness = activeModel((state) => state.setRoughness)
+   const metalness = activeModel((state) => state.metalness)
+   const setMetalness = activeModel((state) => state.setMetalness)
+
+   useEffect(() => {
+      setColors(setHexFromMaterial(materials))
+      setRoughness(MaterialObj(materials).roughness)
+      setMetalness(MaterialObj(materials).metalness)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [])
 
    // Head
    nodes.Head.rotation.x = headTransforms.x
@@ -67,12 +79,12 @@ export default function LowPolySpaceman(props) {
    nodes.LowerLegR.rotation.z = lowerLegRTransforms.z
 
    useEffect(() => {
-      setColors(setHexFromMaterial(materials))
       setShowTransforms(true)
 
       return () => {
          setShowTransforms(false)
       }
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [])
 
    return (
@@ -82,70 +94,70 @@ export default function LowPolySpaceman(props) {
             <primitive object={nodes.UpperLegL} />
             <primitive object={nodes.UpperLegR} />
             <skinnedMesh geometry={nodes.body.geometry} material={nodes.body.material} skeleton={nodes.body.skeleton}>
-               <meshStandardMaterial color={colors.DarkGrey} />
+               <meshStandardMaterial color={colors.DarkGrey} roughness={roughness.DarkGrey} metalness={metalness.DarkGrey} />
             </skinnedMesh>
             <skinnedMesh
                geometry={nodes.body_1.geometry}
                material={nodes.body_1.material}
                skeleton={nodes.body_1.skeleton}
             >
-               <meshStandardMaterial color={colors.White} />
+               <meshStandardMaterial color={colors.White} roughness={roughness.White} metalness={metalness.White} />
             </skinnedMesh>
             <skinnedMesh
                geometry={nodes.body_2.geometry}
                material={nodes.body_2.material}
                skeleton={nodes.body_2.skeleton}
             >
-               <meshStandardMaterial color={colors.Red} />
+               <meshStandardMaterial color={colors.Red} roughness={roughness.Red} metalness={metalness.Red} />
             </skinnedMesh>
             <skinnedMesh
                geometry={nodes.body001.geometry}
                material={nodes.body001.material}
                skeleton={nodes.body001.skeleton}
             >
-               <meshStandardMaterial color={colors.White} />
+               <meshStandardMaterial color={colors.White} roughness={roughness.White} metalness={metalness.White} />
             </skinnedMesh>
             <skinnedMesh
                geometry={nodes.body001_1.geometry}
                material={nodes.body001_1.material}
                skeleton={nodes.body001_1.skeleton}
             >
-               <meshStandardMaterial color={colors.DarkGrey} />
+               <meshStandardMaterial color={colors.DarkGrey} roughness={roughness.DarkGrey} metalness={metalness.DarkGrey} />
             </skinnedMesh>
             <skinnedMesh
                geometry={nodes.body001_2.geometry}
                material={nodes.body001_2.material}
                skeleton={nodes.body001_2.skeleton}
             >
-               <meshStandardMaterial color={colors.Red} />
+               <meshStandardMaterial color={colors.Red} roughness={roughness.Red} metalness={metalness.Red} />
             </skinnedMesh>
             <skinnedMesh
                geometry={nodes.helmet.geometry}
                material={nodes.helmet.material}
                skeleton={nodes.helmet.skeleton}
             >
-               <meshStandardMaterial color={colors.White} />
+               <meshStandardMaterial color={colors.White} roughness={roughness.White} metalness={metalness.White} />
             </skinnedMesh>
             <skinnedMesh
                geometry={nodes.helmet_1.geometry}
                material={nodes.helmet_1.material}
                skeleton={nodes.helmet_1.skeleton}
             >
-               <meshStandardMaterial color={colors.DarkGrey} />
+               <meshStandardMaterial color={colors.DarkGrey} roughness={roughness.DarkGrey} metalness={metalness.DarkGrey} />
             </skinnedMesh>
             <skinnedMesh
                geometry={nodes.helmet_2.geometry}
                material={nodes.helmet_2.material}
                skeleton={nodes.helmet_2.skeleton}
             >
-               <meshStandardMaterial color={colors.Red} />
+               <meshStandardMaterial color={colors.Red} roughness={roughness.Red} metalness={metalness.Red} />
             </skinnedMesh>
             <skinnedMesh
                geometry={nodes.HelmetLense.geometry}
                material={materials.Lense}
                skeleton={nodes.HelmetLense.skeleton}
             >
-               <meshStandardMaterial color={colors.Lense} roughness={0} metalness={1} />
+               <meshStandardMaterial color={colors.Lense} roughness={roughness.Lense} metalness={metalness.Lense} />
             </skinnedMesh>
          </group>
       </group>
