@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react"
-import { useGLTF, useTexture } from "@react-three/drei"
+import { Html, useGLTF, useTexture } from "@react-three/drei"
 import { activeModel, modelImage } from "../zustand/states"
 import { setHexFromMaterial } from "../utils/setHexFromMaterial"
 import { MaterialObj } from "../utils/materialObj"
@@ -15,8 +15,9 @@ function M1Pro14() {
    const setRoughness = activeModel((state) => state.setRoughness)
    const metalness = activeModel((state) => state.metalness)
    const setMetalness = activeModel((state) => state.setMetalness)
-   
+
    const image = modelImage((state) => state.image)
+   const setImage = modelImage((state) => state.setImage)
    const setTemplate = modelImage((state) => state.setTemplate)
    const setShowImageSettings = modelImage((state) => state.setShowImageSettings)
 
@@ -29,39 +30,30 @@ function M1Pro14() {
       setMetalness(MaterialObj(materials).metalness)
       setTemplate("/templates/MacbookTemplate.png")
       setShowImageSettings(true)
+      setImage("/macbook.png")
 
       return () => setShowImageSettings(false)
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [])
 
-   // Go to https://gltf.pmnd.rs/ to export glb into JSX format
-   //          {/* IMPORTANT: SET MATERIAL IN meshStandardMaterial WITH GLOBAL STATE */}
-   // return (
-   //    <group ref={group}>
-   //       <mesh castShadow receiveShadow geometry={nodes.Cylinder.geometry} material={materials.BaseGrey}>
-   //          <meshStandardMaterial
-   //             color={colors.BaseGrey}
-   //             roughness={roughness.BaseGrey}
-   //             metalness={metalness.BaseGrey}
-   //          />
-   //       </mesh>
-   //    </group>
-   // )
-
    return (
       <group ref={group} dispose={null}>
          <mesh castShadow receiveShadow geometry={nodes.screen.geometry} material={nodes.screen.material}>
-            <meshStandardMaterial
-               color={colors.darkgrey}
-               roughness={roughness.darkgrey}
-               metalness={metalness.darkgrey}
-            />
+            <meshStandardMaterial color={colors.Body} roughness={roughness.Body} metalness={metalness.Body} />
          </mesh>
          <mesh castShadow receiveShadow geometry={nodes.screen_1.geometry} material={nodes.screen_1.material}>
-            <meshStandardMaterial color={colors.black} roughness={roughness.black} metalness={metalness.black} />
+            <meshStandardMaterial
+               color={colors.TrimKeys}
+               roughness={roughness.TrimKeys}
+               metalness={metalness.TrimKeys}
+            />
          </mesh>
          <mesh castShadow receiveShadow geometry={nodes.screen_2.geometry} material={materials.screen}>
-            <meshStandardMaterial color={colors.black} roughness={roughness.black} metalness={metalness.black} />
+            <meshStandardMaterial
+               color={colors.TrimKeys}
+               roughness={roughness.TrimKeys}
+               metalness={metalness.TrimKeys}
+            />
          </mesh>
          <mesh castShadow receiveShadow geometry={nodes.screen_3.geometry} material={materials.screencontent}>
             <meshStandardMaterial
@@ -72,33 +64,21 @@ function M1Pro14() {
          </mesh>
          <mesh castShadow receiveShadow geometry={nodes.body.geometry} material={nodes.body.material}>
             <meshStandardMaterial
-               color={colors.black}
-               roughness={roughness.black}
-               metalness={metalness.black}
+               color={colors.TrimKeys}
+               roughness={roughness.TrimKeys}
+               metalness={metalness.TrimKeys}
             />
          </mesh>
-         <mesh castShadow receiveShadow geometry={nodes.body_1.geometry} material={nodes.body_1.material} >
-            <meshStandardMaterial
-               color={colors.darkgrey}
-               roughness={roughness.darkgrey}
-               metalness={metalness.darkgrey}
-            />
+         <mesh castShadow receiveShadow geometry={nodes.body_1.geometry} material={nodes.body_1.material}>
+            <meshStandardMaterial color={colors.Body} roughness={roughness.Body} metalness={metalness.Body} />
          </mesh>
-         <mesh castShadow receiveShadow geometry={nodes.body_2.geometry} material={materials.trackpad}>
-            <meshStandardMaterial
-               color={colors.darkgrey}
-               roughness={roughness.trackpad}
-               metalness={metalness.trackpad}
-            />
+         <mesh castShadow receiveShadow geometry={nodes.body_2.geometry} material={materials.Trackpad}>
+            <meshStandardMaterial color={colors.Body} roughness={roughness.Trackpad} metalness={metalness.Trackpad} />
          </mesh>
-         <mesh castShadow receiveShadow geometry={nodes.body_3.geometry} material={materials.metal}>
-            <meshStandardMaterial
-               color={colors.metal}
-               roughness={roughness.metal}
-               metalness={metalness.metal}
-            />
+         <mesh castShadow receiveShadow geometry={nodes.body_3.geometry} material={materials.Metal}>
+            <meshStandardMaterial color={colors.Metal} roughness={roughness.Metal} metalness={metalness.Metal} />
          </mesh>
-         <mesh castShadow receiveShadow geometry={nodes.body_4.geometry} material={materials["Charger Prong"]} >
+         <mesh castShadow receiveShadow geometry={nodes.body_4.geometry} material={materials["Charger Prong"]}>
             <meshStandardMaterial
                color={colors["Charger Prong"]}
                roughness={roughness["Charger Prong"]}
@@ -111,11 +91,11 @@ function M1Pro14() {
             geometry={nodes.Keys.geometry}
             material={nodes.Keys.material}
             position={[0, -1.31, 1.76]}
-            >
+         >
             <meshStandardMaterial
-               color={colors.black}
-               roughness={roughness.black}
-               metalness={metalness.black}
+               color={colors.TrimKeys}
+               roughness={roughness.TrimKeys}
+               metalness={metalness.TrimKeys}
             />
          </mesh>
          <mesh castShadow receiveShadow geometry={nodes.Image.geometry} material={nodes.Image.material}>
